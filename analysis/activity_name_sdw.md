@@ -1,8 +1,11 @@
 # Software Development Worksheet
 
-- **Course**: {{CS 000}} - {{Course Title}}
-- **Activity**: {{ModNum}}-{{ActNum}}: {{ActivityTitle}}
-- **Program Name**: {{Program-Name}}
+- **Course**: IT 140 - *Introduction to Scripting*
+- **Activities**:
+  - 5-3: Project One Submission
+  - 6-4: Milestone: Moving Between Rooms
+  - 7-3: Project Two Submission
+- **Program Name**: `text_based_game`
 
 Use this worksheet to record the information you need before writing code. Keep your answers brief. Refer to the Software Requirements Specification (SRS) and, when provided, the Software Design Document (SDD).
 

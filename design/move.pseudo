@@ -1,0 +1,49 @@
+DEFINE go_direction(direction: STRING,
+                    current_room: INTEGER,
+                    rooms: MAP)
+    """
+    Moves the player in the specified direction if possible.
+
+    Parameters:
+    - direction: the direction the player wants to go (e.g., "north")
+    - current_room: the player's current location
+    - rooms: a map of rooms and their available directions
+
+    Assumptions:
+    - The player's command has already been parsed and validated
+    - direction is one of ["north", "south", "east", "west"]
+
+    Returns:
+    - The new room if the move is valid (i.e., an exit in that direction)
+    - The current room if the move in that direction is not allowed
+    """
+
+    # TODO: Write detailed pseudocode (low-level design) that implements
+    # and expands on the Go Process flowchart in project_one.md.
+    #
+    # Helpful starting point:
+    # - Think about the major outcomes before writing code-level details.
+    # - One reasonable approach is to check whether the requested direction is
+    #   available from the current room.
+    # - If the move is valid, update the current room and return it.
+    # - Otherwise, keep the player in the same room and provide helpful
+    #   feedback about available directions.
+    #
+    # As you expand the flowchart into pseudocode:
+    # - Use IF / ELSE to show each decision clearly
+    # - Write exact data access using current_room, direction, and rooms
+    # - Use LET for assignments
+    # - Use PUT for player-facing messages on both success and failure paths
+    # - Return a room value on every path
+    #
+    # Keep your design explicit and code-ready, but remember that more than one
+    # correct low-level solution may be possible.
+    #
+    # TODO: Delete these instructional comments when done.
+    # TODO: When done, copy entire pseudocode and paste it into
+    # project_one.md, Section 4.2
+
+ENDFUNCTION
+
+# === References ===
+# TODO: Add any references you used to help you write this pseudocode.

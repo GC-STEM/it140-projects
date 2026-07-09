@@ -1,8 +1,11 @@
 # Software Requirements Specification
 
 - **Course**: IT 140 - Introduction to Scripting
-- **Activity**: {{ModNum}}-{{ActNum}}: {{ActivityTitle}}
-- **Program Name**: {{Program-Name}}
+- **Activities**:
+  - 5-3: Project One Submission
+  - 6-4: Milestone: Moving Between Rooms
+  - 7-3: Project Two Submission
+- **Program Name**: `text_based_game`
 
 ## 0. General Description
 
