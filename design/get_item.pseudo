@@ -1,49 +1,21 @@
-DEFINE get_item(item: STRING,
-                inventory: LIST,
-                current_room: INTEGER,
-                rooms: MAP)
-    """
-    Adds an item from the current room to the player's inventory.
+# Project One Get-Item Pseudocode
+#
+# Write pseudocode, not Python code.
+# Use indentation and clear keywords such as IF, ELSE, INPUT, OUTPUT, SET,
+# APPEND/ADD, or similar pseudocode conventions used in your course.
 
-    Parameters:
-    - item: the item the player wants to add to inventory
-    - inventory: the list of items the player currently has
-    - current_room: the player's current location
-    - rooms: a map of rooms and their contents (i.e., 1 item in each room)
+# TODO 1: Identify the information the get-item process needs to know.
+# Consider the current room, the item in that room, and the player's inventory.
 
-    Assumptions:
-    - The player's command has already been parsed and validated
-    - item is a non-empty string representing the desired item
+# TODO 2: Prompt for and receive the player's get-item command.
 
-    Returns:
-    - The updated inventory after attempting to add the item
-    """
+# TODO 3: Validate whether the requested item is the item available in the current room.
+# Show the decision clearly.
 
-    # TODO: Write detailed pseudocode (low-level design) that implements
-    # and expands on the Get Process flowchart in project_one.md.
-    #
-    # Helpful starting point:
-    # - Think about the major outcomes before writing code-level details.
-    # - One reasonable approach is to check these cases in order:
-    #   1. the player already has the item
-    #   2. the item is in the current room
-    #   3. otherwise, the item is not available here
-    #
-    # As you expand the flowchart into pseudocode:
-    # - Use IF / ELSEIF / ELSE to show each decision clearly
-    # - Write exact condition checks using inventory and rooms
-    # - Use LET only when inventory changes
-    # - Use PUT for player-facing messages for each outcome
-    # - Return inventory on every path
-    #
-    # Keep your design explicit and code-ready, but remember that more
-    # than one correct low-level solution may be possible.
-    #
-    # TODO: Delete these instructional comments when done.
-    # TODO: When done, copy entire pseudocode and paste it into
-    # project_one.md, Section 5.2
+# TODO 4: Describe what happens when the item request is valid.
+# Include the inventory update and player output.
 
-ENDFUNCTION
+# TODO 5: Describe what happens when the item request is invalid.
+# Include the output the player should receive.
 
-# === References ===
-# TODO: Add any references you used to help you write this pseudocode.
+# TODO 6: Show how the process returns to or continues the larger gameplay loop.

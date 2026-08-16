@@ -1,112 +1,115 @@
-# Software Design Document
+# Software Design Document (SDD)
 
 - **Course**: IT 140 - Introduction to Scripting
-- **Activity**: {{ModNum}}-{{ActNum}}: {{ActivityTitle}}
-- **Program Name**: {{Program-Name}}
+- **Activities**: Project One, Module Six Milestone, and Project Two
+- **Program**: Text-Based Adventure Game
+- **Status**: Design reference; do not edit
 
-## 0. General Description
+## 0. Purpose
 
-{{TODO: Replace with a brief description of the planned solution. Explain how the design will meet the Software Requirements Specification (SRS), who will use the program, and the program's main purpose. Focus on how the program will be organized rather than repeating all requirements.}}
+This SDD helps organize the project design without supplying a completed game solution. Your own design decisions belong in:
 
-## 1. Design Goals and Constraints
+- `game_storyboard.md`
+- `game_map.drawio`
+- `move.pseudo`
+- `get_item.pseudo`
 
-The design shall:
+The current Project One Guidelines and Rubric remains the official source for the graded design requirements.
 
-- [ ] 1.1 {{TODO: Replace with the main design goal, such as keeping the solution simple, readable, and appropriate for the course module.}}
+## 1. Design Inputs
 
-- [ ] 1.2 {{TODO: Replace with important design constraints derived from the SRS and the assignment guidelines and rubric (G&R), such as required programming concepts, file structure, libraries, or input and output rules.}}
+Use these sources while designing:
 
-- [ ] 1.x {{TODO: Add any activity-specific design goals or constraints.}}
+1. Project One Guidelines and Rubric
+2. [`../analysis/text_based_game_srs.md`](../analysis/text_based_game_srs.md)
+3. Your optional [`../text_based_game_sdw.md`](../text_based_game_sdw.md) notes
+4. Course-provided sample game resources identified in the Project One activity
 
-## 2. Solution Overview
+Sample materials demonstrate the type of game behavior expected. They do not determine your game's theme, rooms, items, villain, or map.
 
-{{TODO: Describe the solution at a high level. Summarize the major steps the program will perform from start to finish. Identify the design approach used, such as a sequence of steps, function-oriented design, object-oriented design, event-driven design, or another approach appropriate for the activity.}}
+## 2. High-Level Game Model
 
-### Design Artifacts
+The completed game needs to coordinate several kinds of state and behavior:
 
-- **Flowchart**: [`activity_name.drawio`](./activity_name.drawio)
-- **Pseudocode**: [`activity_name.pseudo`](./activity_name.pseudo)
+- **World state** — which rooms connect to which other rooms and which item belongs in each item room
+- **Player location** — the room the player is currently in
+- **Inventory** — the items the player has collected
+- **Input** — movement and get-item commands
+- **Validation** — whether a requested move or item is valid in the current state
+- **Game progression** — repeated turns until the player wins or loses
+- **Output** — instructions, player status, results of commands, and final outcome
 
-{{TODO: Confirm that the flowchart and pseudocode represent the same planned solution described in this document.}}
+Project One designs the important pieces of this model. Project Two later combines them into one working program.
 
-## 3. Program Structure
+## 3. Map Design Constraints
 
-{{TODO: Divide the program into logical components. A component may be the main program, a function, a class, or another meaningful section of the solution. Use only the component types introduced in the course by this activity.}}
+The map should make direction relationships clear.
 
-| # | Component | Responsibility | Input | Output | SRS Requirement(s) |
-| - | --------- | -------------- | ----- | ------ | ------------------ |
-| 1 | {{TODO: Name}} | {{TODO: State what this component does}} | {{TODO: Identify data received}} | {{TODO: Identify data produced or returned}} | {{TODO: Add requirement ID(s)}} |
+When two rooms are connected, ask:
 
-## 4. Data Design
+- Which direction moves from Room A to Room B?
+- What direction should move from Room B back to Room A, if the map allows that return path?
+- Does the arrangement leave a path to every required item before the villain must be encountered?
 
-{{TODO: Identify the important data the program will use. Include only data that helps explain the design, such as key variables, constants, collections, objects, or files. Use clear and descriptive planned names.}}
+The design should be understandable without requiring the final Python dictionary to be written in Project One.
 
-| # | Data Name | Type or Structure | Purpose | Initial Value or Source | Valid Values or Rules |
-| - | --------- | ----------------- | ------- | ----------------------- | --------------------- |
-| 1 | {{TODO: Name}} | {{TODO: Type}} | {{TODO: Purpose}} | {{TODO: Initial value or source}} | {{TODO: Valid values, range, or format}} |
+## 4. Move Process Design
 
-## 5. Interface and Input/Output Design
+The move pseudocode should represent a reusable movement process rather than one hard-coded path through the map.
 
-{{TODO: Describe how users or other systems will interact with the program. Include prompts, expected input, validation rules, output formatting, files, application programming interfaces (APIs), or hardware interfaces as applicable. Refer to the SRS sample input and output rather than copying it unless additional design detail is needed.}}
+The process needs to account for:
 
-| # | Interface or I/O Element | Source or Destination | Format | Validation or Processing | Related Requirement(s) |
-| - | ------------------------ | --------------------- | ------ | ------------------------ | ---------------------- |
-| 1 | {{TODO: Prompt, output, file, API, or device}} | {{TODO: User, file, system, or device}} | {{TODO: Expected format}} | {{TODO: Validation or processing rule}} | {{TODO: Add requirement ID(s)}} |
+- The current room
+- A movement command
+- Whether the requested direction is available from the current room
+- Updating the current room after a valid move
+- Responding to invalid movement input
+- Repetition as gameplay continues
 
-## 6. Program Logic and Control Flow
+Choose the detailed logic yourself in `move.pseudo`.
 
-{{TODO: Explain the program's behavioral design. Describe the planned sequence, decisions, loops, function calls, events, or state changes. The description must be consistent with the flowchart and pseudocode.}}
+## 5. Get-Item Process Design
 
-### 6.1 Main Processing Steps
+The get-item pseudocode should account for:
 
-1. {{TODO: Describe the first major processing step.}}
-2. {{TODO: Describe the next major processing step.}}
-3. {{TODO: Continue until the program reaches its expected end state.}}
+- The current room
+- The item associated with that room, when present
+- The player's item request
+- Validation of the requested item
+- Adding a valid item to inventory
+- Preventing an invalid item request from behaving as though it succeeded
 
-### 6.2 Decisions and Repetition
+Choose the detailed logic yourself in `get_item.pseudo`.
 
-- **Decisions**: {{TODO: Identify important conditions and the action taken for each possible result.}}
-- **Repetition**: {{TODO: Identify any repeated processing, its stopping condition, and how the design prevents an unintended infinite loop. Delete if not applicable.}}
+## 6. Handoff to the Module Six Prototype
 
-## 7. Error and Exception Handling
+The Module Six Milestone does not construct the full design. Instead, it gives you a smaller movement-only implementation exercise using a provided three-room dictionary.
 
-{{TODO: Describe how the design will prevent, detect, and respond to invalid input, missing data, unavailable resources, or other expected errors. Keep the strategy appropriate for the course module and the requirements.}}
+Use the milestone to practice:
 
-| # | Error or Invalid Condition | Detection Method | Planned Response | Related Requirement(s) |
-| - | -------------------------- | ---------------- | ---------------- | ---------------------- |
-| 1 | {{TODO: Condition}} | {{TODO: How the program detects it}} | {{TODO: Message, correction, retry, or safe exit}} | {{TODO: Add requirement ID(s)}} |
+- Translating movement logic into Python
+- Working with a dictionary of room connections
+- Writing a gameplay loop
+- Validating commands
+- Debugging one behavior at a time
 
-## 8. Design Decisions and Rationale
+Do not change your Project One design merely to match the simplified milestone scenario.
 
-{{TODO: Record the most important design choices and explain why each choice is appropriate. Consider simplicity, readability, maintainability, correctness, usability, security, performance, or reuse as applicable. Include meaningful alternatives that were considered when relevant.}}
+## 7. Handoff to Project Two
 
-| # | Design Decision | Rationale | Alternative Considered |
-| - | --------------- | --------- | ---------------------- |
-| 1 | {{TODO: Decision}} | {{TODO: Explain how this choice supports the requirements and design goals}} | {{TODO: Alternative or "None"}} |
+Project Two combines your own Project One design with later course concepts such as functions, lists, and dictionaries.
 
-## 9. Requirements Traceability
+Before coding the final game, compare your four Project One artifacts and resolve inconsistencies. The final room dictionary, item associations, and command logic should reflect your own approved design.
 
-{{TODO: Show how each SRS requirement is addressed by the design. Every applicable functional requirement and constraint should connect to at least one design component or artifact.}}
+## 8. Design Consistency Review
 
-| SRS Requirement | Design Component or Section | Supporting Artifact |
-| --------------- | --------------------------- | ------------------- |
-| {{TODO: Requirement ID}} | {{TODO: Component name or SDD section}} | {{TODO: Flowchart step, pseudocode section, or other artifact}} |
+| Design question | Storyboard | Map | Move pseudocode | Get-item pseudocode |
+| --- | :---: | :---: | :---: | :---: |
+| Theme and names are consistent | Check | Check | — | — |
+| Room names are consistent | Check | Check | Check as needed | Check as needed |
+| Item names are consistent | Check | Check | — | Check |
+| Villain location is consistent | Check | Check | — | — |
+| Movement relationships are possible | — | Check | Check | — |
+| Item behavior matches the scenario | Check | Check | — | Check |
 
-## 10. Design Review Checklist
-
-Before beginning construction, confirm that:
-
-- [ ] 10.1 The design addresses every applicable SRS requirement.
-- [ ] 10.2 The program structure separates the solution into clear, manageable parts.
-- [ ] 10.3 The data names, types, sources, and validation rules are defined.
-- [ ] 10.4 The input, processing, and output steps are complete and consistent.
-- [ ] 10.5 Decisions, loops, functions, events, or state changes are described as applicable.
-- [ ] 10.6 Expected errors and invalid inputs have planned responses.
-- [ ] 10.7 The SDD, flowchart, and pseudocode describe the same solution.
-- [ ] 10.8 The design is simple enough to implement using concepts introduced by this activity.
-- [ ] 10.9 The design can be tested using the SRS acceptance test cases.
-- [ ] 10.x {{TODO: Add any activity-specific design review checks derived from the G&R.}}
-
-## 11. References
-
-{{TODO: List any references in APA7 Style used to create the design, such as the SRS, assignment guidelines, textbooks, or online resources.}}
+If the artifacts disagree, revise them before using them as the plan for Project Two.
