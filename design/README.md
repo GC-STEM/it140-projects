@@ -24,7 +24,7 @@ Complete all four files in this folder:
 - [`move.pseudo`](move.pseudo)
 - [`get_item.pseudo`](get_item.pseudo)
 
-The [Software Design Document (SDD)](text_based_game_sdd.md) is a course-provided design reference. The [SDW](../text_based_game_sdw.md) is optional working space.
+The [Software Design Document (SDD)](text_based_game_sdd.md) is a course-provided design reference. The [SDW](../src/text_based_game_sdw.md) is optional working space.
 
 > [!NOTE]
 > The current Project One directions tell you to create the move and get-item **pseudocode based on course-provided flowcharts**. Those flowcharts are design references rather than student-created Project One submission files. If your course or repository provides the flowchart files, use them as directed and leave the provided originals unchanged.

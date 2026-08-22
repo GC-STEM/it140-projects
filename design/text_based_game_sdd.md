@@ -22,7 +22,7 @@ Use these sources while designing:
 
 1. Project One Guidelines and Rubric
 2. [`../analysis/text_based_game_srs.md`](../analysis/text_based_game_srs.md)
-3. Your optional [`../text_based_game_sdw.md`](../text_based_game_sdw.md) notes
+3. Your optional [`../src/text_based_game_sdw.md`](../src/text_based_game_sdw.md) notes
 4. Course-provided sample game resources identified in the Project One activity
 
 Sample materials demonstrate the type of game behavior expected. They do not determine your game's theme, rooms, items, villain, or map.

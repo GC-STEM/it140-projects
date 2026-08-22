@@ -1,0 +1,101 @@
+name: Project Checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Check projects repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Determine repository mode
+        id: mode
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REPOSITORY" == "GC-STEM/it140-projects" ]]; then
+            echo "mode=starter" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=student" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Ruff
+        run: |
+          python -m pip install --disable-pip-version-check "ruff==0.16.3"
+
+      - name: Check repository structure and project artifacts
+        run: |
+          python .github/ci/check_repository.py \
+            --mode "${{ steps.mode.outputs.mode }}"
+
+      - name: Compile Python files
+        run: |
+          python -m py_compile \
+            prototype/move_between_rooms.py \
+            src/text_based_game.py \
+            tests/test_move_between_rooms.py \
+            tests/test_text_based_game.py \
+            .github/ci/check_repository.py \
+            .github/ci/check_starter.py
+
+      - name: Run Ruff
+        run: |
+          python -m ruff check \
+            prototype/move_between_rooms.py \
+            src/text_based_game.py \
+            tests/test_move_between_rooms.py \
+            tests/test_text_based_game.py \
+            .github/ci/check_repository.py \
+            .github/ci/check_starter.py \
+            --output-format=github
+
+      - name: Validate course starter
+        if: ${{ steps.mode.outputs.mode == 'starter' }}
+        run: python .github/ci/check_starter.py
+
+      - name: Write check summary
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          echo "## IT 140 Projects repository checks" \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Repository mode: **${{ steps.mode.outputs.mode }}**" \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [[ "${{ steps.mode.outputs.mode }}" == "starter" ]]; then
+            echo "The course repository validates the starter artifacts," \
+              "documentation, configuration, and project scaffolding." \
+              >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "A personal repository validates the current project" \
+              "checkpoint based on whether the Module Six prototype or" \
+              "Module Seven source has been changed." \
+              >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "These checks support development. They do not assign a" \
+            "grade or replace manual requirement-based testing." \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "D2L Brightspace remains the submission and grading system." \
+            >> "$GITHUB_STEP_SUMMARY"

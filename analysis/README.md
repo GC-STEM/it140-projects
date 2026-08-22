@@ -16,7 +16,7 @@ The Analyze phase is not a separate graded deliverable. It prepares you to make 
 - Module Six Milestone Guidelines and Rubric in D2L Brightspace
 - Project Two Guidelines and Rubric in D2L Brightspace
 - [Text-Based Game SRS](text_based_game_srs.md)
-- [Software Development Worksheet (SDW)](../text_based_game_sdw.md) for recommended working notes
+- [Software Development Worksheet (SDW)](../src/text_based_game_sdw.md) for recommended working notes
 
 ## What You Will Do in Module Five
 
@@ -26,7 +26,7 @@ The Analyze phase is not a separate graded deliverable. It prepares you to make 
 4. Identify the constraints that make the game winnable.
 5. Identify the two command types the final game must support: moving and getting an item.
 6. Identify the inputs, outputs, decisions, and loops needed for the two pseudocode processes.
-7. Record brief notes in the Analyze section of the [SDW](../text_based_game_sdw.md), if useful.
+7. Record brief notes in the Analyze section of the [SDW](../src/text_based_game_sdw.md), if useful.
 
 > [!IMPORTANT]
 > Project One asks you to **design** the game, not write the complete game code. Keep the focus on the required storyboard, map, and pseudocode.

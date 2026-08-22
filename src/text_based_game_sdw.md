@@ -16,7 +16,7 @@
 
 ## 1. Analyze | Module Five
 
-Use the Project One Guidelines and Rubric and [`analysis/text_based_game_srs.md`](analysis/text_based_game_srs.md).
+Use the Project One Guidelines and Rubric and [`../analysis/text_based_game_srs.md`](../analysis/text_based_game_srs.md).
 
 ### 1.1 Game Goal in Your Own Words
 
@@ -127,7 +127,7 @@ TODO: In words, list the major jobs one turn of the final gameplay loop must per
 
 ## 5. Test | Project Two
 
-Use [`tests/game_test_plan.md`](tests/game_test_plan.md) for detailed test records.
+Use [`../tests/game_test_plan.md`](../tests/game_test_plan.md) for detailed test records.
 
 ### Final SDLC Check
 
