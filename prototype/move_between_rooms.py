@@ -1,4 +1,4 @@
-"""Module Six Milestone starter file for the simplified movement prototype."""
+"""Module Six Milestone starter for the simplified movement prototype."""
 
 # A dictionary for the simplified dragon text game.
 # The dictionary links a room to other rooms.
@@ -14,9 +14,9 @@ rooms = {
 # TODO: Create the gameplay loop required by the milestone.
 # Within the loop, complete the required behavior in small steps:
 #   1. Display the current room.
-#   2. Prompt the player for a movement command or "exit".
-#   3. Use decision branching to handle a valid move, exit, or invalid input.
-#   4. Update the current room only when the command should move the player.
-#   5. End the loop when the required exit condition is reached.
+#   2. Prompt for a movement command or "exit".
+#   3. Branch for a valid move, exit, or invalid input.
+#   4. Update the room only after a valid movement command.
+#   5. Continue until the required exit condition is reached.
 
-# TODO: Run and debug the program using the cases listed in prototype/README.md.
+# TODO: Run and debug all milestone cases in prototype/README.md.

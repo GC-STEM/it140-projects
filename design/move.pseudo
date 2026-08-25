@@ -1,22 +1,25 @@
 # Project One Move-Between-Rooms Pseudocode
 #
-# Write pseudocode, not Python code.
-# Use indentation and clear keywords such as IF, ELSE, WHILE, INPUT, OUTPUT,
-# SET, or similar pseudocode conventions used in your course.
+# Graded checkpoint: Module Five Project One
+# Later use: conceptual support for M6; movement design for M7
+#
+# Review the course-provided movement flowchart before completing this file.
+# Write pseudocode, not Python code. Use clear indentation and course-appropriate
+# keywords such as INPUT, OUTPUT, IF, ELSE, WHILE, SET, or similar terms.
 
-# TODO 1: Identify the information the movement process needs to know.
-# Consider the player's current room and the movement command.
+# TODO 1: Identify the information the movement process needs.
+# Consider the player's current room and movement command.
 
 # TODO 2: Prompt for and receive the player's movement command.
 
-# TODO 3: Validate whether the requested movement is possible from the current room.
-# Show the decision clearly.
+# TODO 3: Validate whether the requested movement is possible from the
+# current room. Show the decision clearly.
 
 # TODO 4: Describe what happens when the movement command is valid.
-# Include the needed room update and player output.
+# Include the room update and player output.
 
 # TODO 5: Describe what happens when the movement command is invalid.
 # Include the output the player should receive.
 
-# TODO 6: Show how this process fits into repeated gameplay.
-# The final game continues accepting commands until the game reaches an ending condition.
+# TODO 6: Show how movement fits into repeated gameplay.
+# The final game continues accepting commands until a required ending occurs.

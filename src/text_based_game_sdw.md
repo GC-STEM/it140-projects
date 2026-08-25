@@ -1,139 +1,145 @@
-# Software Development Worksheet (SDW)
+# Project Two Software Development Worksheet
 
 - **Course**: IT 140 - Introduction to Scripting
-- **Activities**: Project One, Module Six Milestone, and Project Two
-- **Program**: Text-Based Adventure Game
-- **Purpose**: Optional working notes across the three-module project sequence
+- **Activity**: Project Two
+- **Program**: Complete Text-Based Adventure Game
+- **Purpose**: Optional working notes for the M7 Construct + Test checkpoint
 
 > [!NOTE]
-> This worksheet is a learning aid. It is **not a graded deliverable** unless your instructor specifically asks for it. Keep notes brief. The graded work belongs in the Project One design files, the Module Six prototype file, and the Project Two source file.
+> This worksheet is not a graded deliverable unless your instructor specifically
+> asks for it. The graded Project Two work belongs in `text_based_game.py`.
 
-## Project Progress
+## 1. Handoff Review
 
-> **Analyze → Design → Prototype → Construct → Test**
+### Where to Look
 
----
+Review:
 
-## 1. Analyze | Module Five
+- Current Project Two Guidelines and Rubric
+- `../design/game_storyboard.md`
+- `../design/game_map.drawio`
+- `../design/move.pseudo`
+- `../design/get_item.pseudo`
+- Project One instructor feedback
+- `../prototype/move_between_rooms.py`
+- Module Six instructor feedback
 
-Use the Project One Guidelines and Rubric and [`../analysis/text_based_game_srs.md`](../analysis/text_based_game_srs.md).
+### Handoff Checkpoint
 
-### 1.1 Game Goal in Your Own Words
+- [ ] My storyboard and map agree.
+- [ ] I reviewed Project One feedback.
+- [ ] I reviewed milestone feedback.
+- [ ] I know which milestone ideas can be reused.
+- [ ] I know which milestone sample behaviors must be replaced.
 
-TODO: In one or two sentences, explain what the player must do to win and what causes the player to lose.
+## 2. Prototype-to-Final Differences
 
-### 1.2 Required World Elements
+Complete this before copying or adapting milestone code.
 
-| Element | Your notes |
-| --- | --- |
-| Theme | TODO |
-| Storyline | TODO |
-| Start room | TODO |
-| Villain | TODO |
-| Minimum room count | TODO |
-| Minimum item count | TODO |
+| Concern | Module Six | Project Two |
+| --- | --- | --- |
+| Game world | Provided sample | TODO: My own design |
+| Items/inventory | Not included | TODO |
+| Villain | Not included | TODO |
+| Ending | `exit` | TODO |
+| Commands | Movement + exit | TODO |
 
-### 1.3 Command Types
+## 3. Final Dictionary Plan
 
-TODO: Describe the two command types required by the project without writing Python code.
+Use the Project One map as the source. Record only what helps you verify the
+translation.
 
-### Analyze Checkpoint
+| Room | Neighbor directions to verify | Item, if any |
+| --- | --- | --- |
+| TODO | TODO | TODO |
+| TODO | TODO | TODO |
+| TODO | TODO | TODO |
 
-- [ ] I understand the minimum room and item requirements.
-- [ ] I know which rooms cannot contain items.
-- [ ] I understand what makes the map winnable.
-- [ ] I understand the movement action.
-- [ ] I understand the get-item action.
+Add rows as needed.
 
----
+### Dictionary Checkpoint
 
-## 2. Design | Project One
+- [ ] Every Project One room is represented.
+- [ ] Direction names and destination rooms match the map.
+- [ ] Item placement matches the map/storyboard.
+- [ ] The start room has no item.
+- [ ] The villain room has no item.
 
-### 2.1 Map Planning Notes
+## 4. Function Plan
 
-TODO: List room names and rough directional relationships before or while editing the Draw.io map.
+Project Two requires function(s) for commands/status behavior.
 
-### 2.2 Item Placement Notes
+| Function | Responsibility | Called from |
+| --- | --- | --- |
+| TODO | TODO | TODO |
+| TODO | TODO | TODO |
 
-TODO: Record which item belongs in which room. Do not put an item in the start room or villain room.
+Use only as many functions as you need to meet the requirements clearly.
 
-### 2.3 Pseudocode Consistency Notes
+## 5. Gameplay Loop Plan
 
-- [ ] Move pseudocode matches the map's directional connections.
-- [ ] Get-item pseudocode matches the item behavior required by the project.
-- [ ] Names are consistent across the storyboard and map.
+List the major jobs that happen during one turn of the final game.
 
-### Project One Submission Check
+1. TODO
+2. TODO
+3. TODO
+4. TODO
+5. TODO
 
-- [ ] `game_storyboard.md` complete
-- [ ] `game_map.drawio` complete
-- [ ] `move.pseudo` complete
-- [ ] `get_item.pseudo` complete
-- [ ] Submitted through D2L Brightspace as directed
+What conditions stop the loop?
 
----
+**Your notes:**
 
-## 3. Prototype | Module Six Milestone
+TODO: Identify both required final outcomes.
 
-### 3.1 Design-to-Code Notes
+## 6. Command and Validation Plan
 
-What Python concepts did you use to implement the simplified movement prototype?
+| Command category | Validation question | State change/output |
+| --- | --- | --- |
+| Movement | TODO | TODO |
+| Get item | TODO | TODO |
+| Invalid input | TODO | TODO |
 
-| Need | Python concept you used |
-| --- | --- |
-| Store room connections | TODO |
-| Repeat gameplay | TODO |
-| Choose command behavior | TODO |
-| Validate input | TODO |
-| Update current room | TODO |
+Compare these notes with your Project One pseudocode before coding the branches.
 
-### 3.2 Milestone Debugging Notes
+## 7. Win and Loss Plan
 
-TODO: Record one problem you found while testing and how you fixed it, or write `No changes needed`.
+### Winning
 
-### Milestone Submission Check
+TODO: What state proves the player has collected all required items?
 
-- [ ] `prototype/move_between_rooms.py` meets the current milestone requirements.
-- [ ] I tested valid movement, invalid input, and exit.
-- [ ] I reviewed readability and naming.
-- [ ] I submitted the required `.py` file through D2L Brightspace.
+### Losing
 
----
+TODO: What state proves the player reached the villain too early?
 
-## 4. Construct | Project Two
+### Ending Checkpoint
 
-### 4.1 Design Handoff
+- [ ] The milestone `exit` condition is not being used as the final game ending.
+- [ ] The final loop can reach both required outcomes.
 
-Before coding the full game:
+## 8. Incremental Construction Check
 
-- [ ] I reviewed instructor feedback from Project One.
-- [ ] I reviewed instructor feedback from the Module Six milestone.
-- [ ] My storyboard and map still agree.
-- [ ] My pseudocode reflects the behavior I intend to code.
+- [ ] Required function(s) run.
+- [ ] Dictionary loads without a syntax error.
+- [ ] One valid move works.
+- [ ] One invalid move is rejected.
+- [ ] One valid item can be collected.
+- [ ] One invalid item command is handled.
+- [ ] Inventory updates correctly.
+- [ ] Winning behavior works.
+- [ ] Losing behavior works.
 
-### 4.2 Full Game Data Notes
+## 9. Debugging Notes
 
-TODO: Record anything you need to check while turning your map into the final room/item dictionary.
+| Failing case | Cause found | Change made | Retest result |
+| --- | --- | --- | --- |
+| TODO | TODO | TODO | TODO |
 
-### 4.3 Function Plan
+## 10. Final Submission Check
 
-TODO: Identify the function or functions you plan to use for instructions/status. Keep the plan simple and within Project Two requirements.
-
-### 4.4 Gameplay Loop Plan
-
-TODO: In words, list the major jobs one turn of the final gameplay loop must perform.
-
----
-
-## 5. Test | Project Two
-
-Use [`../tests/game_test_plan.md`](../tests/game_test_plan.md) for detailed test records.
-
-### Final SDLC Check
-
-- [ ] Analyze: I understand the project requirements.
-- [ ] Design: My Project One artifacts form a consistent game design.
-- [ ] Prototype: I completed and tested the Module Six movement prototype.
-- [ ] Construct: My Project Two code follows my own design.
-- [ ] Test: I tested movement, item behavior, winning, and losing.
-- [ ] Submit: I followed the current D2L What to Submit instructions for all three graded checkpoints.
+- [ ] I tested a complete winning path.
+- [ ] I tested a complete losing path.
+- [ ] I tested invalid movement and item input.
+- [ ] I reviewed function/variable names, comments, whitespace, and indentation.
+- [ ] I removed unfinished `TODO:` and `pass` placeholders.
+- [ ] I saved `text_based_game.py` before submitting it in D2L Brightspace.

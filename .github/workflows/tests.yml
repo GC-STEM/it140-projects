@@ -84,18 +84,17 @@ jobs:
             >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           if [[ "${{ steps.mode.outputs.mode }}" == "starter" ]]; then
-            echo "The course repository validates the starter artifacts," \
-              "documentation, configuration, and project scaffolding." \
+            echo "The course repository validates the M5 design," \
+              "M6 prototype, and M7 final-game starter artifacts." \
               >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "A personal repository validates the current project" \
-              "checkpoint based on whether the Module Six prototype or" \
-              "Module Seven source has been changed." \
-              >> "$GITHUB_STEP_SUMMARY"
+            echo "A personal repository validates the progressive" \
+              "M5 → M6 → M7 graded checkpoint reached by the student's" \
+              "changed deliverable files." >> "$GITHUB_STEP_SUMMARY"
           fi
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "These checks support development. They do not assign a" \
-            "grade or replace manual requirement-based testing." \
+            "grade or replace requirement-based manual testing." \
             >> "$GITHUB_STEP_SUMMARY"
           echo "D2L Brightspace remains the submission and grading system." \
             >> "$GITHUB_STEP_SUMMARY"

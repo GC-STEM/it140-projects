@@ -1,55 +1,84 @@
-# Prototype Phase | Module Six Milestone
+# Prototype | Module Six Milestone
 
-**Project progress:** [Start Here](../README.md) → [1 Analyze](../analysis/README.md) → [2 Design | M5](../design/README.md) → **3 Prototype | M6** → [4 Construct | M7](../src/README.md) → [5 Test](../tests/README.md)
+**Project sequence:** [Start Here](../README.md) →
+[M5 Analyze](../analysis/README.md) → [M5 Design](../design/README.md) →
+**M6 Construct/Test Prototype** → [M7 Construct](../src/README.md) →
+[M7 Test](../tests/README.md)
 
 ## Purpose
 
-The Module Six Milestone is a **working prototype** of one part of the final text-based game: moving between rooms.
-
-You are not building the complete Project Two game yet. The milestone deliberately uses a smaller provided dragon-game dictionary so you can practice translating movement logic into Python in small steps.
+The Module Six Milestone is a **reduced Construct + Test iteration** of the
+project SDLC. You will build one working portion of the larger text game before
+integrating the complete system in Module Seven.
 
 The graded milestone deliverable is:
 
 - [`move_between_rooms.py`](move_between_rooms.py)
 
+## Prototype Scope: What Is and Is Not Included
+
+| Included in M6 | Intentionally deferred to M7 |
+| --- | --- |
+| Provided three-room dragon dictionary | Your Project One room map |
+| Current-room output | Items in rooms |
+| Movement commands | Inventory |
+| `exit` command | Villain behavior |
+| Gameplay loop | Winning by collecting all items |
+| Decision branching | Losing by entering villain room too early |
+| Input validation | Get-item command |
+| Debugging/readability | Full-game functions and integration |
+
+This boundary is important. A successful milestone is **not** supposed to look
+like the complete Project Two game.
+
 ## Before You Code
 
-1. Read the complete Module Six Milestone Guidelines and Rubric.
-2. Review the milestone video, flowchart, and other supporting materials listed in D2L Brightspace.
-3. Review your Project One [`../design/move.pseudo`](../design/move.pseudo) to reconnect the movement design ideas with Python code.
-4. Open the course-provided [SRS](../analysis/text_based_game_srs.md) and review the Module Six section.
+Review:
 
-> [!IMPORTANT]
-> The milestone's required behavior comes from the Module Six Milestone Guidelines and Rubric. Your Project One pseudocode is a design aid, but the milestone uses the specified simplified prototype scenario.
+1. Module Six Milestone Guidelines and Rubric in D2L Brightspace
+2. Milestone Simplified Dragon Text Game supporting resources
+3. Your Project One [`../design/move.pseudo`](../design/move.pseudo)
+4. Project One instructor feedback related to movement
+5. [SRS Section 2](../analysis/text_based_game_srs.md#2-module-six-milestone--construct-and-test-a-reduced-prototype)
 
-## What the Prototype Must Do
+Your Project One movement pseudocode can help you think about input, validation,
+branching, and room updates. The milestone's **actual required scenario** still
+comes from the current milestone Guidelines and Rubric.
 
-Your milestone program should include the required behavior for:
+## Provided Dictionary
 
-- Showing the current room
-- Prompting for a command
-- Moving to a linked room after a valid movement command
-- Handling the `exit` command
-- Rejecting invalid commands with an appropriate message
-- Repeating through a gameplay loop until the exit condition is reached
-- Using decision branching to control the command paths
-- Using readable comments, whitespace, and naming
+The starter already includes the exact simplified dictionary supplied by the
+milestone:
 
-The provided starter file already contains the dictionary supplied by the milestone directions. Complete the `TODO:` sections without replacing the required dictionary with the full Project Two game yet.
+```python
+rooms = {
+    "Great Hall": {"south": "Bedroom"},
+    "Bedroom": {"north": "Great Hall", "east": "Cellar"},
+    "Cellar": {"west": "Bedroom"},
+}
+```
 
-## Work Incrementally
+Read it carefully before coding. Do not replace it with your Project One rooms
+for this checkpoint.
 
-A useful order is:
+## Build the Prototype Incrementally
 
-1. Run the starter file before making large changes.
-2. Establish the current-room value.
-3. Add the gameplay loop.
-4. Display the current room.
-5. Read one command.
-6. Handle one command path at a time.
-7. Test after each small change.
-8. Add or revise input validation.
-9. Test all required cases again.
+Open [`move_between_rooms.py`](move_between_rooms.py).
+
+A useful development sequence is:
+
+1. Establish the starting room.
+2. Create the gameplay loop.
+3. Display the current room.
+4. Prompt for one command.
+5. Handle a valid movement command.
+6. Handle `exit`.
+7. Handle invalid input.
+8. Repeat until the required exit condition is reached.
+9. Test each branch and fix one defect at a time.
+
+The optional [`move_between_rooms_sdw.md`](move_between_rooms_sdw.md) gives you
+working space for this reduced problem.
 
 ## Run the Prototype
 
@@ -59,31 +88,61 @@ From the repository root:
 python3 prototype/move_between_rooms.py
 ```
 
-On Windows, if needed:
+On Windows, if `python3` is unavailable in your configured course environment:
 
 ```powershell
 python prototype/move_between_rooms.py
 ```
 
-## Milestone Test Checklist
+## Review Against the Milestone Rubric
 
-Before submitting:
+| Rubric criterion | Weight | Evidence to review |
+| --- | ---: | --- |
+| Functionality | 30% | Required movement and exit behavior works |
+| Gameplay Loop | 10% | Repetition controls continued play |
+| Decision Branching | 20% | Valid move, exit, and invalid paths are handled |
+| Input Validation | 20% | Invalid commands are rejected appropriately |
+| Debugging | 10% | Required cases were run and corrected |
+| Industry Standard Best Practices | 10% | Comments, whitespace, and names support readability |
 
-- [ ] A valid movement command moves to the correct linked room.
-- [ ] Another valid direction can move from a different room.
-- [ ] An invalid movement command does not move the player.
-- [ ] An invalid command produces the expected type of error output.
-- [ ] The player can enter `exit`.
-- [ ] The gameplay loop ends when the required exit condition is reached.
-- [ ] The code runs without syntax errors.
-- [ ] Names, comments, and whitespace make the code readable.
+## Test the Milestone
 
-Use [`../tests/game_test_plan.md`](../tests/game_test_plan.md) if you want a place to record test results.
+Use the Module Six section of [`../tests/README.md`](../tests/README.md).
+
+At minimum, check:
+
+- [ ] A valid move from the Great Hall.
+- [ ] A valid move from the Bedroom.
+- [ ] An invalid direction.
+- [ ] An invalid command.
+- [ ] The `exit` command.
+- [ ] The loop ends at the required exit condition.
+- [ ] The program runs without syntax errors.
+- [ ] Names, comments, and whitespace are readable.
 
 ## Milestone Submission Checkpoint
 
-Return to the [Module Six | Milestone](../README.md#module-six--milestone) section in the top-level README and follow the current D2L **What to Submit** instructions.
+Submit `move_between_rooms.py` in D2L Brightspace according to the current
+Module Six What to Submit instructions.
 
-## Next Step
+Keep the file and review instructor feedback after grading.
 
-Keep this prototype after submitting it. In Module Seven, continue to the [Construct Phase](../src/README.md) for Project Two.
+## Handoff to Project Two
+
+In Module Seven:
+
+**Reuse or adapt:**
+
+- Movement/dictionary techniques that worked
+- Loop and branching experience
+- Input-validation lessons
+- Debugging lessons and instructor feedback
+
+**Replace or expand:**
+
+- Replace the three-room sample data with your Project One world.
+- Add item and inventory behavior.
+- Add required functions and function calls.
+- Replace the milestone `exit` ending with the Project Two win/loss conditions.
+
+Continue to the [Project Two Construct instructions](../src/README.md).

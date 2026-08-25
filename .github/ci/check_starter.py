@@ -23,22 +23,19 @@ STORYBOARD_MARKERS = (
     "TODO: Villain room",
     "TODO: Identify and briefly describe the villain.",
 )
-
 MOVE_MARKERS = tuple(f"TODO {number}:" for number in range(1, 7))
 GET_ITEM_MARKERS = tuple(f"TODO {number}:" for number in range(1, 7))
-
 PROTOTYPE_MARKERS = (
     "TODO: Set the player's starting room",
     "TODO: Create the gameplay loop",
-    "TODO: Run and debug the program",
+    "TODO: Run and debug all milestone cases",
 )
-
 FINAL_SOURCE_MARKERS = (
     "TODO: Add the full-name comment",
     "TODO: Print instructions",
     "TODO: Show the current room.",
     "TODO: Show the current inventory.",
-    "TODO: Create the complete room and item dictionary",
+    "TODO: Create the full room/item dictionary",
     "TODO: Set the player's starting room.",
     "TODO: Create the player's inventory.",
     "TODO: Create the gameplay loop.",
@@ -63,7 +60,6 @@ class StarterChecks:
             print("PASS: Module Six prototype starter is intact.")
             print("PASS: Project Two source starter is intact.")
             return
-
         print("Course starter checks failed:", file=sys.stderr)
         for error in self.errors:
             print(f"- {error}", file=sys.stderr)
@@ -118,7 +114,6 @@ def check_game_map(checks: StarterChecks) -> None:
     except (OSError, ET.ParseError) as exc:
         checks.error(f"Game-map starter is not valid Draw.io XML: {exc}")
         return
-
     text = path.read_text(encoding="utf-8")
     required = (
         'name="Game Map"',
@@ -131,7 +126,6 @@ def check_game_map(checks: StarterChecks) -> None:
     for marker in required:
         if marker not in text:
             checks.error(f"Game-map starter is missing marker: {marker!r}")
-
     tag = root.tag.rsplit("}", maxsplit=1)[-1]
     if tag != "mxfile":
         checks.error("Game-map starter must keep an mxfile root.")
@@ -157,22 +151,16 @@ def check_prototype(checks: StarterChecks) -> None:
     relative_path = "prototype/move_between_rooms.py"
     path = REPO_ROOT / relative_path
     text = path.read_text(encoding="utf-8")
-
     for marker in PROTOTYPE_MARKERS:
         if marker not in text:
-            checks.error(
-                f"Prototype starter is missing marker: {marker!r}"
-            )
-
+            checks.error(f"Prototype starter is missing marker: {marker!r}")
     tree = parse_python(relative_path, checks)
     if tree is None:
         return
-
     if find_assignment_value(tree, "rooms") != EXPECTED_PROTOTYPE_ROOMS:
         checks.error(
             "Prototype starter must keep the provided three-room dictionary."
         )
-
     executable = [
         node
         for node in tree.body
@@ -185,27 +173,24 @@ def check_prototype(checks: StarterChecks) -> None:
     assignments = [node for node in executable if isinstance(node, ast.Assign)]
     if len(executable) != 1 or len(assignments) != 1:
         checks.error(
-            "Prototype starter must remain intentionally incomplete after "
-            "the provided rooms dictionary."
+            "Prototype starter must remain incomplete after the rooms "
+            "dictionary."
         )
 
 
 def check_final_source(checks: StarterChecks) -> None:
-    """Verify the Project Two source remains a valid incomplete starter."""
+    """Verify Project Two source remains a valid incomplete starter."""
     relative_path = "src/text_based_game.py"
     path = REPO_ROOT / relative_path
     text = path.read_text(encoding="utf-8")
-
     for marker in FINAL_SOURCE_MARKERS:
         if marker not in text:
             checks.error(
                 f"Project Two starter is missing marker: {marker!r}"
             )
-
     tree = parse_python(relative_path, checks)
     if tree is None:
         return
-
     functions = {
         node.name: node
         for node in tree.body
@@ -217,7 +202,6 @@ def check_final_source(checks: StarterChecks) -> None:
             "Project Two starter must keep show_instructions(), "
             "show_status(), and main()."
         )
-
     for name in expected:
         function = functions.get(name)
         if function is None:
@@ -227,7 +211,6 @@ def check_final_source(checks: StarterChecks) -> None:
                 f"Project Two starter function {name}() must remain "
                 "intentionally incomplete."
             )
-
     guards = [
         node
         for node in tree.body

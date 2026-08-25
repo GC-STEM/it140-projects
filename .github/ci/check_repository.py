@@ -23,14 +23,8 @@ M5_GRADED_PATHS = {
     "design/move.pseudo",
     "design/get_item.pseudo",
 }
-
-M6_GRADED_PATHS = {
-    "prototype/move_between_rooms.py",
-}
-
-M7_GRADED_PATHS = {
-    "src/text_based_game.py",
-}
+M6_GRADED_PATHS = {"prototype/move_between_rooms.py"}
+M7_GRADED_PATHS = {"src/text_based_game.py"}
 
 EDITABLE_PATHS = (
     M5_GRADED_PATHS
@@ -84,11 +78,12 @@ REQUIRED_FILES = (
 REQUIRED_TEXT_MARKERS = {
     "README.md": (
         "# IT 140 Projects | Modules Five–Seven",
-        "## Module Five | Project One",
-        "## Module Six | Milestone",
-        "## Module Seven | Project Two",
-        "## Review the Automated Repository Checks",
-        "## Help and Support",
+        "## Three Graded Checkpoints",
+        "# Module Five | Project One",
+        "# Module Six | Milestone",
+        "# Module Seven | Project Two",
+        "# Review the Automated Repository Checks",
+        "# Help and Support",
     ),
     ".github/RЕADME.md": (
         "# About the `.github` Folder",
@@ -96,39 +91,67 @@ REQUIRED_TEXT_MARKERS = {
         "## Issue or Project Question?",
     ),
     "analysis/README.md": (
-        "# Analyze Phase | Understand the Text-Game Requirements",
-        "## Purpose",
+        "# Analyze Phase | Requirements Across Modules Five–Seven",
+        "## Module Five | Initial Analysis",
+        "## Module Six | Reanalyze the Reduced Scope",
+        "## Module Seven | Reanalyze Before Integration",
         "## Analyze Checkpoint",
     ),
     "analysis/text_based_game_srs.md": (
         "# Software Requirements Specification (SRS)",
-        "## 1. Project One | Game Design Requirements",
-        "## 2. Module Six Milestone | Simplified Prototype Requirements",
-        "## 3. Project Two | Full Game Requirements",
+        "## 1. Project One | Analyze and Design Requirements",
+        "## 2. Module Six Milestone | Construct and Test a Reduced Prototype",
+        "## 3. Project Two | Construct and Test the Complete Game",
+        "## 4. Cross-Module Handoff Requirements",
     ),
     "design/README.md": (
         "# Design Phase | Module Five Project One",
         "## Graded Deliverables",
+        "## 5. Review Against the Project One Rubric",
         "## Project One Submission Checkpoint",
     ),
     "design/text_based_game_sdd.md": (
         "# Software Design Document",
         "## 2. High-Level Game Model",
+        "## 7. Module Six Prototype Handoff",
+        "## 8. Project Two Integration Handoff",
+        "## 9. Requirements Traceability",
     ),
     "prototype/README.md": (
-        "# Prototype Phase | Module Six Milestone",
-        "## What the Prototype Must Do",
-        "## Milestone Submission Checkpoint",
+        "# Prototype | Module Six Milestone",
+        "## Prototype Scope: What Is and Is Not Included",
+        "## Review Against the Milestone Rubric",
+        "## Handoff to Project Two",
+    ),
+    "prototype/move_between_rooms_sdw.md": (
+        "# Module Six Milestone Software Development Worksheet",
+        "## 1. Scope Check",
+        "## 7. Test and Debug Notes",
+        "## 8. Project Two Handoff",
     ),
     "src/README.md": (
-        "# Construct Phase | Module Seven Project Two",
-        "## Required Functions and Organization",
+        "# Construct | Module Seven Project Two",
+        "## Inputs From Earlier Modules",
+        "## The Final Game Is Different From the Milestone",
+        "## Review Against the Project Two Rubric",
         "## Construction Checkpoint",
     ),
+    "src/text_based_game_sdw.md": (
+        "# Project Two Software Development Worksheet",
+        "## 1. Handoff Review",
+        "## 7. Win and Loss Plan",
+        "## 10. Final Submission Check",
+    ),
     "tests/README.md": (
-        "# Test Phase | Module Six and Module Seven",
-        "## Module Six Prototype Tests",
+        "# Test | Module Six and Module Seven",
+        "# Module Six | Test the Movement Prototype",
+        "# Module Seven | Test the Complete Game",
         "## Final Project Two Check",
+    ),
+    "tests/game_test_plan.md": (
+        "# Text-Based Game Test Plan",
+        "# Module Six | Prototype Tests",
+        "# Module Seven | Full Playthroughs",
     ),
 }
 
@@ -166,11 +189,9 @@ class Checks:
         """Print results and exit nonzero if any checks failed."""
         for note in self.notes:
             print(f"PASS: {note}")
-
         if not self.errors:
             print("PASS: Repository and project checks completed.")
             return
-
         print("\nRepository checks failed:", file=sys.stderr)
         for error in self.errors:
             print(f"- {error}", file=sys.stderr)
@@ -184,15 +205,17 @@ def read_text(relative_path: str) -> str:
 
 def check_required_files(checks: Checks) -> None:
     """Verify required repository files exist and are nonempty."""
+    missing_or_empty = 0
     for relative_path in REQUIRED_FILES:
         path = REPO_ROOT / relative_path
         if not path.is_file():
             checks.error(f"Required file is missing: {relative_path}")
+            missing_or_empty += 1
             continue
         if path.stat().st_size == 0:
             checks.error(f"Required file is empty: {relative_path}")
-
-    if not checks.errors:
+            missing_or_empty += 1
+    if missing_or_empty == 0:
         checks.note("Required repository files are present and nonempty.")
 
 
@@ -200,23 +223,19 @@ def check_json_and_toml(checks: Checks) -> None:
     """Parse repository JSON and TOML configuration files."""
     settings_path = REPO_ROOT / ".vscode/settings.json"
     pyproject_path = REPO_ROOT / "pyproject.toml"
-
     try:
         settings = json.loads(settings_path.read_text(encoding="utf-8"))
         if not isinstance(settings, dict):
             checks.error(".vscode/settings.json must contain a JSON object.")
     except (OSError, json.JSONDecodeError) as exc:
         checks.error(f"Invalid .vscode/settings.json: {exc}")
-
     try:
         with pyproject_path.open("rb") as handle:
             pyproject = tomllib.load(handle)
         lint = pyproject.get("tool", {}).get("ruff", {}).get("lint", {})
         selected = set(lint.get("select", []))
         if not {"E", "F"}.issubset(selected):
-            checks.error(
-                "pyproject.toml must keep Ruff E and F checks enabled."
-            )
+            checks.error("pyproject.toml must keep Ruff E and F enabled.")
     except (OSError, tomllib.TOMLDecodeError) as exc:
         checks.error(f"Invalid pyproject.toml: {exc}")
 
@@ -233,25 +252,22 @@ def check_required_text_markers(checks: Checks) -> None:
                     f"{marker}"
                 )
                 missing += 1
-
     if missing == 0:
-        checks.note("Major Markdown artifacts keep their expected sections.")
+        checks.note("Major documentation keeps its expected structure.")
 
 
 def check_game_map(checks: Checks) -> None:
-    """Verify the Project One game-map file remains parseable Draw.io XML."""
+    """Verify the Project One game map remains parseable Draw.io XML."""
     path = REPO_ROOT / "design/game_map.drawio"
     try:
         root = ET.parse(path).getroot()
     except (OSError, ET.ParseError) as exc:
         checks.error(f"Invalid Draw.io XML in design/game_map.drawio: {exc}")
         return
-
     tag = root.tag.rsplit("}", maxsplit=1)[-1]
     if tag != "mxfile":
         checks.error("design/game_map.drawio must have an mxfile root.")
         return
-
     diagrams = [
         node
         for node in root.iter()
@@ -260,7 +276,6 @@ def check_game_map(checks: Checks) -> None:
     if not diagrams:
         checks.error("design/game_map.drawio contains no diagram page.")
         return
-
     checks.note("The Project One game map is parseable Draw.io XML.")
 
 
@@ -273,13 +288,12 @@ def check_png_signature(relative_path: str) -> tuple[int, int] | None:
 
 
 def check_reference_pngs(checks: Checks) -> None:
-    """Verify course-provided flowchart reference images remain PNG files."""
+    """Verify course-provided flowchart references remain PNG files."""
     invalid = [
         path for path in REFERENCE_PNGS if check_png_signature(path) is None
     ]
     for path in invalid:
-        checks.error(f"Provided flowchart reference is not a valid PNG: {path}")
-
+        checks.error(f"Provided flowchart reference is not a PNG: {path}")
     if not invalid:
         checks.note("Provided flowchart reference PNG files are valid.")
 
@@ -289,7 +303,6 @@ def without_code_fences(text: str) -> str:
     output: list[str] = []
     in_fence = False
     fence_marker = ""
-
     for line in text.splitlines():
         stripped = line.lstrip()
         if stripped.startswith("```") or stripped.startswith("~~~"):
@@ -303,28 +316,23 @@ def without_code_fences(text: str) -> str:
             continue
         if not in_fence:
             output.append(line)
-
     return "\n".join(output)
 
 
 def local_link_target(raw_target: str) -> str | None:
-    """Return a local Markdown link path or None for external/anchor links."""
+    """Return a local Markdown path or None for external/anchor links."""
     target = raw_target.strip()
     if not target:
         return None
-
     if target.startswith("<") and ">" in target:
         target = target[1 : target.index(">")]
     else:
         target = target.split(maxsplit=1)[0]
-
     if target.startswith("#"):
         return None
-
     parsed = urlsplit(target)
     if parsed.scheme or parsed.netloc:
         return None
-
     path = unquote(parsed.path)
     if not path or path.startswith("/"):
         return None
@@ -335,19 +343,15 @@ def check_markdown_links(checks: Checks) -> None:
     """Verify local links in repository Markdown files resolve."""
     broken = 0
     repo_root = REPO_ROOT.resolve()
-
     for file_path in sorted(REPO_ROOT.rglob("*.md")):
         if ".git" in file_path.parts:
             continue
-
         relative_path = file_path.relative_to(REPO_ROOT)
         text = without_code_fences(file_path.read_text(encoding="utf-8"))
-
         for match in MARKDOWN_LINK.finditer(text):
             target = local_link_target(match.group(1))
             if target is None:
                 continue
-
             resolved = (file_path.parent / target).resolve()
             try:
                 resolved.relative_to(repo_root)
@@ -358,39 +362,32 @@ def check_markdown_links(checks: Checks) -> None:
                 )
                 broken += 1
                 continue
-
             if not resolved.exists():
                 checks.error(
                     f"Broken local link in {relative_path}: {target}"
                 )
                 broken += 1
-
     if broken == 0:
         checks.note("Local links in Markdown files resolve.")
 
 
 def check_social_preview(checks: Checks) -> None:
-    """Check the repository social-preview PNG signature, size, and ratio."""
+    """Check the repository social-preview PNG."""
     path = REPO_ROOT / ".github/social-preview.png"
     data = path.read_bytes()
-
     if len(data) > 1_048_576:
         checks.error(".github/social-preview.png must remain under 1 MiB.")
         return
-
     dimensions = check_png_signature(".github/social-preview.png")
     if dimensions is None:
         checks.error(".github/social-preview.png is not a valid PNG file.")
         return
-
     width, height = dimensions
     if width < 640 or height < 320:
         checks.error(
-            "Social preview dimensions are unexpectedly small: "
-            f"{width}x{height}."
+            f"Social preview dimensions are too small: {width}x{height}."
         )
         return
-
     ratio = width / height
     if not 1.9 <= ratio <= 2.1:
         checks.error(
@@ -398,7 +395,6 @@ def check_social_preview(checks: Checks) -> None:
             f"found {width}x{height}."
         )
         return
-
     checks.note(
         f"Social preview is valid ({width}x{height}, {len(data)} bytes)."
     )
@@ -422,22 +418,13 @@ def git_output(*args: str) -> str:
 def student_changed_paths(checks: Checks) -> set[str] | None:
     """Return committed paths changed since the template root commit."""
     try:
-        roots = git_output(
-            "rev-list",
-            "--max-parents=0",
-            "HEAD",
-        ).splitlines()
+        roots = git_output("rev-list", "--max-parents=0", "HEAD").splitlines()
     except RuntimeError as exc:
         checks.error(f"Could not inspect repository history: {exc}")
         return None
-
     if len(roots) != 1:
-        checks.error(
-            "Could not identify one initial template commit for this "
-            "personal repository."
-        )
+        checks.error("Could not identify one initial template commit.")
         return None
-
     try:
         changed_text = git_output(
             "diff",
@@ -449,7 +436,6 @@ def student_changed_paths(checks: Checks) -> set[str] | None:
     except RuntimeError as exc:
         checks.error(f"Could not compare with the template commit: {exc}")
         return None
-
     return {line for line in changed_text.splitlines() if line}
 
 
@@ -460,22 +446,18 @@ def check_student_change_scope(
     """Ensure committed changes are limited to student-editable files."""
     if changed is None:
         return
-
     unexpected = sorted(changed - EDITABLE_PATHS)
     for path in unexpected:
         checks.error(
-            "Course-managed repository file was added, removed, renamed, or "
-            f"changed: {path}"
+            "Course-managed repository file was added, removed, renamed, "
+            f"or changed: {path}"
         )
-
     if not unexpected:
-        checks.note(
-            "Committed changes are limited to student project/working files."
-        )
+        checks.note("Committed changes are limited to student project files.")
 
 
 def determine_checkpoint(changed: set[str]) -> int:
-    """Infer the active graded checkpoint from later-stage file changes."""
+    """Infer the active checkpoint from later-stage graded-file changes."""
     if changed & M7_GRADED_PATHS:
         return 7
     if changed & M6_GRADED_PATHS:
@@ -508,44 +490,34 @@ def pseudocode_statement_count(text: str) -> int:
 
 
 def check_project_one_completion(checks: Checks) -> None:
-    """Check basic completion state of the four Project One artifacts."""
+    """Check basic completion state of the Project One artifacts."""
     storyboard = read_text("design/game_storyboard.md")
     if "TODO:" in storyboard:
-        checks.error(
-            "Project One storyboard still contains starter TODO prompts."
-        )
-
+        checks.error("Project One storyboard still contains TODO prompts.")
     map_text = read_text("design/game_map.drawio")
     if "TODO" in map_text or "replace room labels" in map_text:
-        checks.error(
-            "Project One game map still contains starter placeholder text."
-        )
-
+        checks.error("Project One game map still has starter placeholders.")
     for path in ("design/move.pseudo", "design/get_item.pseudo"):
         text = read_text(path)
         if "TODO" in text:
             checks.error(f"{path} still contains starter TODO prompts.")
         if pseudocode_statement_count(text) < 4:
             checks.error(
-                f"{path} does not contain enough pseudocode statements "
-                "to represent a completed design."
+                f"{path} needs more pseudocode statements for a completed "
+                "design."
             )
-
+    prefixes = ("Project One", "design/")
     if not any(
-        error.startswith("Project One")
-        or error.startswith("design/")
+        any(error.startswith(prefix) for prefix in prefixes)
         for error in checks.errors
     ):
-        checks.note(
-            "Project One design artifacts have replaced starter prompts."
-        )
+        checks.note("Project One design artifacts replaced starter prompts.")
 
 
 def parse_python(relative_path: str, checks: Checks) -> ast.Module | None:
     """Parse one project Python file and report syntax errors."""
-    text = read_text(relative_path)
     try:
-        return ast.parse(text, filename=relative_path)
+        return ast.parse(read_text(relative_path), filename=relative_path)
     except SyntaxError as exc:
         checks.error(f"{relative_path} is not valid Python: {exc}")
         return None
@@ -601,24 +573,18 @@ def check_milestone_completion(checks: Checks) -> None:
     path = "prototype/move_between_rooms.py"
     text = read_text(path)
     if "TODO:" in text:
-        checks.error(
-            "Module Six prototype still contains starter TODO prompts."
-        )
-
+        checks.error("Module Six prototype still contains TODO prompts.")
     tree = parse_python(path, checks)
     if tree is None:
         return
-
     if find_assignment_value(tree, "rooms") != EXPECTED_PROTOTYPE_ROOMS:
         checks.error(
             "Module Six prototype must keep the provided three-room "
             "movement dictionary."
         )
-
-    has_loop = any(
+    if not any(
         isinstance(node, (ast.For, ast.While)) for node in ast.walk(tree)
-    )
-    if not has_loop:
+    ):
         checks.error("Module Six prototype must contain a gameplay loop.")
     if not any(isinstance(node, ast.If) for node in ast.walk(tree)):
         checks.error("Module Six prototype must use decision branching.")
@@ -630,60 +596,49 @@ def check_milestone_completion(checks: Checks) -> None:
         isinstance(node, ast.Constant) and node.value == "exit"
         for node in ast.walk(tree)
     ):
-        checks.error("Module Six prototype must recognize the 'exit' command.")
-
-    milestone_errors = (
-        "Module Six prototype",
-        f"{path} is not valid Python",
-    )
+        checks.error("Module Six prototype must recognize 'exit'.")
+    prefixes = ("Module Six prototype", f"{path} is not valid Python")
     if not any(
-        any(error.startswith(prefix) for prefix in milestone_errors)
+        any(error.startswith(prefix) for prefix in prefixes)
         for error in checks.errors
     ):
         checks.note("Module Six prototype has the expected basic structure.")
 
 
 def check_project_two_completion(checks: Checks) -> None:
-    """Check basic Project Two source structure without grading game content."""
+    """Check basic Project Two structure without grading game content."""
     path = "src/text_based_game.py"
     text = read_text(path)
     if "TODO:" in text:
-        checks.error("Project Two source still contains starter TODO prompts.")
-
+        checks.error("Project Two source still contains TODO prompts.")
     tree = parse_python(path, checks)
     if tree is None:
         return
-
     if any(isinstance(node, ast.Pass) for node in ast.walk(tree)):
         checks.error("Project Two source still contains pass placeholders.")
-
     functions = [
         node for node in tree.body if isinstance(node, ast.FunctionDef)
     ]
     if not any(node.name == "main" for node in functions):
-        checks.error("Project Two source must contain a main() function.")
+        checks.error("Project Two source must contain main().")
     if len(functions) < 2:
         checks.error(
-            "Project Two source must use at least one helper function "
-            "in addition to main()."
+            "Project Two source must use at least one helper function in "
+            "addition to main()."
         )
     if not has_main_guard(tree):
         checks.error("Project Two source must run main() from a main guard.")
-
     has_dictionary = any(isinstance(node, ast.Dict) for node in ast.walk(tree))
     has_dictionary |= calls_named(tree, "dict")
     if not has_dictionary:
         checks.error("Project Two source must create a room/item dictionary.")
-
     has_inventory = any(isinstance(node, ast.List) for node in ast.walk(tree))
     has_inventory |= calls_named(tree, "list")
     if not has_inventory:
         checks.error("Project Two source must create an inventory list.")
-
-    has_loop = any(
+    if not any(
         isinstance(node, (ast.For, ast.While)) for node in ast.walk(tree)
-    )
-    if not has_loop:
+    ):
         checks.error("Project Two source must contain a gameplay loop.")
     if not any(isinstance(node, ast.If) for node in ast.walk(tree)):
         checks.error("Project Two source must use decision branching.")
@@ -691,13 +646,9 @@ def check_project_two_completion(checks: Checks) -> None:
         checks.error("Project Two source must obtain player commands.")
     if not calls_named(tree, "print"):
         checks.error("Project Two source must display game information.")
-
-    project_two_prefixes = (
-        "Project Two source",
-        f"{path} is not valid Python",
-    )
+    prefixes = ("Project Two source", f"{path} is not valid Python")
     if not any(
-        any(error.startswith(prefix) for prefix in project_two_prefixes)
+        any(error.startswith(prefix) for prefix in prefixes)
         for error in checks.errors
     ):
         checks.note("Project Two source has the expected basic structure.")
@@ -710,9 +661,7 @@ def check_student_checkpoint(
     """Validate the appropriate progressive project checkpoint."""
     if changed is None:
         return
-
     checkpoint = determine_checkpoint(changed)
-
     require_changed_paths(
         checks,
         changed,
@@ -720,7 +669,6 @@ def check_student_checkpoint(
         "Project One",
     )
     check_project_one_completion(checks)
-
     if checkpoint >= 6:
         require_changed_paths(
             checks,
@@ -729,7 +677,6 @@ def check_student_checkpoint(
             "Module Six Milestone",
         )
         check_milestone_completion(checks)
-
     if checkpoint >= 7:
         require_changed_paths(
             checks,
@@ -738,7 +685,6 @@ def check_student_checkpoint(
             "Project Two",
         )
         check_project_two_completion(checks)
-
     checks.note(
         f"Personal repository checkpoint detected: Module {checkpoint}."
     )
@@ -751,7 +697,7 @@ def parse_args() -> argparse.Namespace:
         "--mode",
         required=True,
         choices=("starter", "student"),
-        help="Validate the course starter or a personal student repository.",
+        help="Validate the course starter or a personal project repository.",
     )
     return parser.parse_args()
 
@@ -760,23 +706,19 @@ def main() -> None:
     """Run repository and project checks."""
     args = parse_args()
     checks = Checks()
-
     check_required_files(checks)
     if checks.errors:
         checks.finish()
-
     check_json_and_toml(checks)
     check_required_text_markers(checks)
     check_game_map(checks)
     check_reference_pngs(checks)
     check_markdown_links(checks)
     check_social_preview(checks)
-
     if args.mode == "student":
         changed = student_changed_paths(checks)
         check_student_change_scope(checks, changed)
         check_student_checkpoint(checks, changed)
-
     checks.finish()
 
 

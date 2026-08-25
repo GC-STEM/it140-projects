@@ -1,27 +1,25 @@
-"""Project Two starter file for the student's text-based adventure game."""
+"""Project Two starter for the student's text-based adventure game."""
 
-# TODO: Add the full-name comment required by the current Project Two
-# directions.
+# TODO: Add the full-name comment required by Project Two directions.
 
 
 def show_instructions():
-    """Display the game name, objective, and available commands."""
-    # TODO: Print instructions that match your game and required commands.
+    """Display the game objective and available commands."""
+    # TODO: Print instructions that match your game and commands.
     pass
 
 
 def show_status(current_room, inventory, rooms):
-    """Display the player's current status."""
+    """Display the player's current game status."""
     # TODO: Show the current room.
     # TODO: Show the current inventory.
-    # TODO: Show the item in the current room when the room has one.
+    # TODO: Show the current-room item when one is available.
     pass
 
 
 def main():
     """Run the main gameplay loop."""
-    # TODO: Create the complete room and item dictionary from your
-    # Project One map.
+    # TODO: Create the full room/item dictionary from your Project One map.
 
     # TODO: Set the player's starting room.
 

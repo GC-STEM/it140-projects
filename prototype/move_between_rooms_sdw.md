@@ -1,98 +1,139 @@
-# Software Development Worksheet
+# Module Six Milestone Software Development Worksheet
 
-- **Course**: IT 140 - *Introduction to Scripting*
-- **Activities**:
-  - 5-3: Project One Submission
-  - 6-4: Milestone: Moving Between Rooms
-  - 7-3: Project Two Submission
-- **Program Name**: `text_based_game`
+- **Course**: IT 140 - Introduction to Scripting
+- **Activity**: Module Six Milestone
+- **Program**: Simplified Movement Prototype
+- **Purpose**: Optional working notes for the M6 Construct + Test checkpoint
 
-Use this worksheet to record the information you need before writing code. Keep your answers brief. Refer to the Software Requirements Specification (SRS) and, when provided, the Software Design Document (SDD).
+> [!NOTE]
+> This worksheet is not a graded deliverable unless your instructor specifically
+> asks for it. The graded milestone work belongs in `move_between_rooms.py`.
 
-## 1. Document Review
+## How to Use This Worksheet
 
-Before planning your code, confirm that you reviewed the available documents:
+Keep answers brief. Use it to translate the current milestone requirements and
+your Project One movement design into a small implementation plan.
 
-- [ ] Software Requirements Specification (SRS)
-- [ ] Software Design Document (SDD), if provided
-- [ ] Sample input and output
-- [ ] Acceptance test cases
+## 1. Scope Check
 
-## 2. Program Purpose
+### Where to Look
 
-**In one or two sentences, what must the program accomplish?**
+- Module Six Milestone Guidelines and Rubric
+- Milestone Simplified Text Game Flowchart/supporting materials
+- `../design/move.pseudo`
+- `../analysis/text_based_game_srs.md`, Section 2
 
-{{TODO: Summarize the program's main purpose in your own words.}}
+### Prompt
 
-## 3. Required Program Behaviors
+In your own words, what does the simplified milestone need to accomplish?
 
-List the main tasks the program must perform. Include the related SRS requirement number when available.
+**Your notes:**
 
-| SRS Requirement | What the Code Must Do |
-| --------------- | --------------------- |
-| {{TODO: 1.1}} | {{TODO: Describe the required behavior in your own words.}} |
-| {{TODO}} | {{TODO}} |
-| {{TODO}} | {{TODO}} |
+TODO: Summarize the milestone purpose without describing the full Project Two
+game.
 
-## 4. Inputs and Outputs
+### Reduced-Scope Checkpoint
 
-### Inputs
+- [ ] I understand that the milestone uses the provided three-room dictionary.
+- [ ] I understand that the milestone includes movement and `exit`.
+- [ ] I understand that items, inventory, villain, and final win/loss behavior
+  are deferred to Project Two.
 
-| Input | Source | Type or Format | Valid Values or Rules |
-| ----- | ------ | -------------- | --------------------- |
-| {{TODO: Input name}} | {{TODO: User, file, device, or system}} | {{TODO: Type or format}} | {{TODO: Valid range, choices, or format}} |
+## 2. Understand the Provided Dictionary
 
-### Outputs
+### Prompt
 
-| Output | Destination | Required Format |
-| ------ | ----------- | --------------- |
-| {{TODO: Output name}} | {{TODO: Screen, file, device, or system}} | {{TODO: Required wording or format}} |
+Trace the room connections before coding.
 
-## 5. Processing Plan
+| Current room | Valid direction | Destination |
+| --- | --- | --- |
+| Great Hall | TODO | TODO |
+| Bedroom | TODO | TODO |
+| Bedroom | TODO | TODO |
+| Cellar | TODO | TODO |
 
-List the major steps the program will follow from start to finish. Use the SDD, flowchart, or pseudocode when provided.
+What should happen if a requested direction is not listed for the current room?
 
-1. {{TODO: First major step.}}
-2. {{TODO: Next major step.}}
-3. {{TODO: Continue as needed.}}
+**Your notes:**
 
-## 6. Planned Code Structure
+TODO: Describe the required validation behavior in your own words.
 
-Complete this section only when the SDD identifies required functions, classes, files, or other components.
+## 3. Input, Process, Output
 
-| Component | Responsibility |
-| --------- | -------------- |
-| {{TODO: Function, class, file, or main program}} | {{TODO: What this component must do}} |
-| {{TODO}} | {{TODO}} |
+### Input
 
-## 7. Constraints and Required Techniques
+TODO: What command does the player provide, and what values/categories must the
+program recognize?
 
-Record only the constraints that affect how you write the code.
+### Process
 
-- **Required language or version**: {{TODO}}
-- **Required programming concepts or techniques**: {{TODO}}
-- **Required libraries, files, or tools**: {{TODO}}
-- **Techniques or features not allowed**: {{TODO: Enter "None stated" if none are identified.}}
-- **Other important constraints**: {{TODO}}
+TODO: What decisions and state updates occur after the command is entered?
 
-## 8. Invalid Input and Error Cases
+### Output
 
-| Invalid Input or Error | Expected Program Response |
-| ---------------------- | ------------------------- |
-| {{TODO: Invalid value, missing data, or other expected problem}} | {{TODO: Error message, retry, correction, or safe exit}} |
-| {{TODO}} | {{TODO}} |
+TODO: What information must the player see during normal and invalid input?
 
-## 9. Ready-to-Code Check
+## 4. Gameplay Loop Plan
 
-Before writing code, confirm that:
+### Prompt
 
-- [ ] I can explain what the program must accomplish.
-- [ ] I identified the required inputs, processing, and outputs.
-- [ ] I identified the required program structure and techniques.
-- [ ] I know how the program should respond to expected invalid input or errors.
-- [ ] My plan agrees with the SRS and the SDD, when provided.
-- [ ] I can use the acceptance test cases to check my completed program.
+Describe one iteration of the loop.
 
-## Questions or Unclear Requirements
+1. TODO
+2. TODO
+3. TODO
+4. TODO
 
-{{TODO: Record any questions or unclear requirements. Enter "None" if everything is clear.}}
+What condition causes the loop to stop?
+
+**Your notes:**
+
+TODO
+
+## 5. Branch Plan
+
+Complete the behavior table without writing the full Python solution here.
+
+| Command category | Expected behavior |
+| --- | --- |
+| Valid movement | TODO |
+| `exit` | TODO |
+| Invalid input | TODO |
+
+## 6. Incremental Construction Check
+
+- [ ] I can display the current room.
+- [ ] I can obtain one command.
+- [ ] I can recognize a valid movement command.
+- [ ] I can update the current room after a valid move.
+- [ ] I can recognize `exit`.
+- [ ] I can reject invalid input.
+- [ ] I can repeat until the exit condition is reached.
+
+## 7. Test and Debug Notes
+
+| Case | Expected result | Actual result | Pass? |
+| --- | --- | --- | :---: |
+| Valid move | TODO | TODO | TODO |
+| Different valid move | TODO | TODO | TODO |
+| Invalid direction | TODO | TODO | TODO |
+| Invalid command | TODO | TODO | TODO |
+| Exit | TODO | TODO | TODO |
+
+**Debugging note:**
+
+TODO: Record one defect and correction, or write `No changes needed`.
+
+## 8. Project Two Handoff
+
+What did you learn from this prototype that should carry into Project Two?
+
+**Your notes:**
+
+TODO: Record one or two useful implementation/debugging lessons.
+
+What milestone-only behavior must **not** become the final design?
+
+**Your notes:**
+
+TODO: Identify the sample-world and ending differences you must revisit in M7.
