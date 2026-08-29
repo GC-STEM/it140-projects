@@ -1,29 +1,44 @@
-# IT 140 Projects | Modules Five–Seven
+<!-- To see this file in a clean, formatted view, select "Text Editor ▼" in the upper-right corner of the editor, then select "Markdown Preview". -->
+
+# IT 140 Projects | Modules Five–Seven | Text-Based Game Projects
 
 ---
 
 > [!IMPORTANT]
 > **GitHub repository options**
 >
-> If you are completing this repository as part of your IT 140 assignment, do not use the GitHub options in the upper-right corner except as follows:
+> **Do not select Fork or Use this template.** These options will interfere with the repository setup commands later in this README.
 >
-> - 🟡 **Watch — Not recommended:** Notifications may confuse students and are not needed.
-> - 🔴 **Fork — Do not use:** It will break the code later in this README file.
-> - 🟢 **Star — Recommended:** Later code will bookmark this repository so it is easier to find later.
-> - 🔴 **Use this template — Do not use:** It will break the code later in this README file.
->
-> **Faculty**: Consider selecting **Watch** → **Custom** → **Releases + Issues** to receive major repository updates and follow reported problems.
+> - 🚫 **Fork — Do not use**
+> - 🚫 **Use this template — Do not use**
+> - ⭐ **Star** — The setup commands later in this README will bookmark this repository so you can find it more easily.
+> - 👁️ **Watch**
+>   - **Students:** Not recommended. Watching is not needed and may generate unnecessary notifications.
+>   - **Faculty:** Consider selecting **Watch → Custom → Releases + Issues** to receive major repository updates and follow reported issues.
 
 ---
 
-- **Course**: IT 140 - Introduction to Scripting
-- **Sequence**: Project One → Module Six Milestone → Project Two
+> [!NOTE]
+> **🆕 New for 2026 C-5:** IT 140 now uses GitHub repositories to provide assignment starter files, development resources, and supporting documentation.
+>
+> If you find a problem with this GitHub repository or its instructions, or have a suggestion for improvement, please open [GitHub Issues](https://github.com/GC-STEM/it140-projects/issues) to review existing issues or create a new issue.
+
+---
+
+- **Course**: IT 140 - *Introduction to Scripting*
+- **Task Titles**:
+  - **5-3**: Project One Submission
+  - **6-4**: Milestone: Moving Between Rooms
+  - **7-3**: Project Two Submission
+- **Task Type**: Required, graded, one submission required for each task
+- **Repository Version**: 1.0.0
+- **Repository Version Date**: 08/29/2026
 - **Program**: Text-Based Adventure Game
-- **Repository model**: One personal repository used across all three modules
+- **Repository Model**: One personal repository used across all three modules
 
 > [!NOTE]
 > The IT 140 project SDLC is distributed across **three modules**. Do not create
-> a new project repository for each activity.
+> a new project repository for each task.
 >
 > **Module 5:** Analyze + Design → submit Project One  
 > **Module 6:** Construct + Test a simplified prototype → submit the Milestone  
@@ -31,7 +46,7 @@
 
 ## Three Graded Checkpoints
 
-| Module | Activity | SDLC work | Graded deliverables | What carries forward |
+| Module | Task | SDLC work | Graded deliverables | What carries forward |
 | --- | --- | --- | --- | --- |
 | 5 | Project One | Analyze + Design | `design/game_storyboard.md`, `design/game_map.drawio`, `design/move.pseudo`, `design/get_item.pseudo` | Your approved game world and command designs |
 | 6 | Module Six Milestone | Construct + Test a reduced movement prototype | `prototype/move_between_rooms.py` | Movement/dictionary/loop experience and instructor feedback |
@@ -43,7 +58,7 @@ ending so you can practice one part of the final system in a smaller problem.
 
 ## Start With the Current Guidelines and Rubric
 
-Before beginning each checkpoint, open that activity's current **Guidelines and
+Before beginning each checkpoint, open that task's current **Guidelines and
 Rubric** in [D2L Brightspace](https://learn.snhu.edu/).
 
 Those pages are the official sources for requirements, grading criteria, and
@@ -52,7 +67,7 @@ into a development workflow; they do not replace the D2L instructions.
 
 Use this source priority if instructions ever differ:
 
-1. Current activity **Guidelines and Rubric** in D2L Brightspace
+1. Current task **Guidelines and Rubric** in D2L Brightspace
 2. Instructions from your instructor
 3. Current repository README and phase README files
 4. Supplemental project Wiki pages
