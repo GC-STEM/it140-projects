@@ -31,8 +31,8 @@
   - **6-4**: Milestone: Moving Between Rooms
   - **7-3**: Project Two Submission
 - **Task Type**: Required, graded, one submission required for each task
-- **Repository Version**: 1.0.0
-- **Repository Version Date**: 08/29/2026
+- **Repository Version**: 1.0.1
+- **Repository Version DTG**: 2026-08-30-07-01
 - **Program**: Text-Based Adventure Game
 - **Repository Model**: One personal repository used across all three modules
 
@@ -40,8 +40,8 @@
 > The IT 140 project SDLC is distributed across **three modules**. Do not create
 > a new project repository for each task.
 >
-> **Module 5:** Analyze + Design → submit Project One  
-> **Module 6:** Construct + Test a simplified prototype → submit the Milestone  
+> **Module 5:** Analyze + Design → submit Project One
+> **Module 6:** Construct + Test a simplified prototype → submit the Milestone
 > **Module 7:** Construct + Test the final game → submit Project Two
 
 ## Three Graded Checkpoints
