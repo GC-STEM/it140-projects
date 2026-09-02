@@ -31,8 +31,8 @@
   - **6-4**: Milestone: Moving Between Rooms
   - **7-3**: Project Two Submission
 - **Task Type**: Required, graded, one submission required for each task
-- **Repository Version**: 1.0.2
-- **Repository Version DTG**: 2026-08-30-12-56
+- **Repository Version**: 1.0.3
+- **Repository Version DTG**: 2026-09-02-09-37
 - **Program**: Text-Based Adventure Game
 - **Repository Model**: One personal repository used across all three modules
 
