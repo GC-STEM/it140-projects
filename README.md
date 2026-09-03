@@ -152,7 +152,7 @@ From the VS Code integrated terminal:
 ```bash
 cd ~/Repos
 gh auth setup-git
-gh api --method PUT /user/starred/GC-STEM/it140-projects
+gh api --method PUT user/starred/GC-STEM/it140-projects
 gh repo create it140-projects --template GC-STEM/it140-projects --private --clone
 cd it140-projects
 git remote -v
