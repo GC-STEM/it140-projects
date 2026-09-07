@@ -1,6 +1,6 @@
 # Project Two Software Development Worksheet
 
-- **Course**: IT 140 - Introduction to Scripting
+* **Course**: IT 140 - Introduction to Scripting
 - **Activity**: Project Two
 - **Program**: Complete Text-Based Adventure Game
 - **Purpose**: Optional working notes for the M7 Construct + Test checkpoint

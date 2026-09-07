@@ -1,4 +1,4 @@
-<!-- To see this file in a clean, formatted view, select "Text Editor ▼" in the upper-right corner of the editor, then select "Markdown Preview". -->
+<!-- To see this file in a clean, formatted view, select ▼ in the upper-right corner of the editor pane, then select "Markdown Preview". -->
 
 # IT 140 Projects | Modules Five–Seven | Text-Based Game Projects
 
@@ -9,12 +9,12 @@
 >
 > **Do not select Fork or Use this template.** These options will interfere with the repository setup commands later in this README.
 >
-> - 🚫 **Fork — Do not use**
-> - 🚫 **Use this template — Do not use**
-> - ⭐ **Star** — The setup commands later in this README will bookmark this repository for you.
-> - 👁️ **Watch**
->   - **Students:** Not recommended. Watching is not needed and may generate unnecessary notifications.
->   - **Faculty:** Consider selecting **Watch → Custom → Releases + Issues** to receive major repository updates and follow reported issues.
+> * 🚫 **Fork — Do not use**
+> * 🚫 **Use this template — Do not use**
+> * ⭐ **Star** — The setup commands later in this README will bookmark this repository for you.
+> * 👁️ **Watch**
+>   * **Students:** Not recommended. Watching is not needed and may generate unnecessary notifications.
+>   * **Faculty:** Consider selecting **Watch → Custom → Releases + Issues** to receive major repository updates and follow reported issues.
 
 ---
 
@@ -25,14 +25,14 @@
 
 ---
 
-- **Course**: IT 140 - *Introduction to Scripting*
+* **Course**: IT 140 - *Introduction to Scripting*
 - **Task Titles**:
   - **5-3**: Project One Submission
   - **6-4**: Milestone: Moving Between Rooms
   - **7-3**: Project Two Submission
-- **Task Type**: Required, graded, one submission required for each task
-- **Repository Version**: 1.0.3
-- **Repository Version DTG**: 2026-09-02-09-37
+* **Task Type**: Required, graded, one submission required for each task
+* **Repository Version**: 1.0.4
+* **Repository Version DTG**: 2026-09-07-14-30
 - **Program**: Text-Based Adventure Game
 - **Repository Model**: One personal repository used across all three modules
 

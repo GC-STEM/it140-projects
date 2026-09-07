@@ -1,6 +1,6 @@
 # Module Six Milestone Software Development Worksheet
 
-- **Course**: IT 140 - Introduction to Scripting
+* **Course**: IT 140 - Introduction to Scripting
 - **Activity**: Module Six Milestone
 - **Program**: Simplified Movement Prototype
 - **Purpose**: Optional working notes for the M6 Construct + Test checkpoint

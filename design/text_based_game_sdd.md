@@ -1,6 +1,6 @@
 # Software Design Document
 
-- **Course**: IT 140 - Introduction to Scripting
+* **Course**: IT 140 - Introduction to Scripting
 - **Activities**: Project One, Module Six Milestone, and Project Two
 - **Program**: Text-Based Adventure Game
 - **Status**: Course-provided design reference; do not edit
