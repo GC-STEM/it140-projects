@@ -196,7 +196,9 @@ def policy_errors(block: CommandBlock) -> list[str]:
     if "$env:" in text.lower():
         errors.append("uses PowerShell $env: syntax in a Bash block")
     if WINDOWS_DRIVE_RE.search(text):
-        errors.append("uses a Windows drive path in a cross-platform Bash block")
+        errors.append(
+            "uses a Windows drive path in a cross-platform Bash block"
+        )
     if WINDOWS_HOME_BACKSLASH_RE.search(text):
         errors.append("uses backslashes with ~ or $HOME in a Bash block")
     if re.search(r'(?im)^\s*code\s+["\']?(?:~|\$HOME)/Repos/', text):
