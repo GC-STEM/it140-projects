@@ -10,9 +10,9 @@ import struct
 import subprocess
 import sys
 import tomllib
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
-import xml.etree.ElementTree as ET
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -25,11 +25,10 @@ M5_GRADED_PATHS = {
 }
 M6_GRADED_PATHS = {"prototype/move_between_rooms.py"}
 M7_GRADED_PATHS = {"src/text_based_game.py"}
+ALL_GRADED_PATHS = M5_GRADED_PATHS | M6_GRADED_PATHS | M7_GRADED_PATHS
 
 EDITABLE_PATHS = (
-    M5_GRADED_PATHS
-    | M6_GRADED_PATHS
-    | M7_GRADED_PATHS
+    ALL_GRADED_PATHS
     | {
         "prototype/move_between_rooms_sdw.md",
         "src/text_based_game_sdw.md",
@@ -45,12 +44,14 @@ REQUIRED_FILES = (
     ".github/RЕADME.md",
     ".github/ISSUE_TEMPLATE/report-a-problem.yml",
     ".github/ISSUE_TEMPLATE/request-an-improvement.yml",
+    ".github/ci/README.md",
+    ".github/ci/check_readme_commands.py",
     ".github/ci/check_repository.py",
     ".github/ci/check_starter.py",
     ".github/social-preview.png",
     ".github/workflows/external-links.yml",
+    ".github/workflows/readme-commands.yml",
     ".github/workflows/tests.yml",
-    ".github/workflows/tests.yml.disabled",
     ".vscode/settings.json",
     "analysis/README.md",
     "analysis/text_based_game_srs.md",
@@ -79,16 +80,26 @@ REQUIRED_TEXT_MARKERS = {
     "README.md": (
         "# IT 140 Projects | Modules Five–Seven",
         "## Three Graded Checkpoints",
+        "## Set Up or Open Your Personal Projects Repository",
         "# Module Five | Project One",
         "# Module Six | Milestone",
         "# Module Seven | Project Two",
         "# Review the Automated Repository Checks",
+        "# Return to Existing Work",
         "# Help and Support",
     ),
     ".github/RЕADME.md": (
         "# About the `.github` Folder",
+        "## What Is Here?",
         "## Automated Repository Checks",
         "## Issue or Project Question?",
+    ),
+    ".github/ci/README.md": (
+        "# IT 140 Projects | GitHub Continuous Integration Guide",
+        "## Student CI",
+        "## Course Repository CI",
+        "## Maintainer Guidance",
+        "## Summary",
     ),
     "analysis/README.md": (
         "# Analyze Phase | Requirements Across Modules Five–Seven",
@@ -661,6 +672,15 @@ def check_student_checkpoint(
     """Validate the appropriate progressive project checkpoint."""
     if changed is None:
         return
+
+    graded_changes = changed & ALL_GRADED_PATHS
+    if not graded_changes:
+        checks.note(
+            "No graded project checkpoint has started; untouched starter "
+            "deliverables are a neutral state."
+        )
+        return
+
     checkpoint = determine_checkpoint(changed)
     require_changed_paths(
         checks,
@@ -669,6 +689,7 @@ def check_student_checkpoint(
         "Project One",
     )
     check_project_one_completion(checks)
+
     if checkpoint >= 6:
         require_changed_paths(
             checks,
@@ -677,6 +698,7 @@ def check_student_checkpoint(
             "Module Six Milestone",
         )
         check_milestone_completion(checks)
+
     if checkpoint >= 7:
         require_changed_paths(
             checks,
@@ -685,6 +707,7 @@ def check_student_checkpoint(
             "Project Two",
         )
         check_project_two_completion(checks)
+
     checks.note(
         f"Personal repository checkpoint detected: Module {checkpoint}."
     )
@@ -706,19 +729,25 @@ def main() -> None:
     """Run repository and project checks."""
     args = parse_args()
     checks = Checks()
+
     check_required_files(checks)
     if checks.errors:
         checks.finish()
+
     check_json_and_toml(checks)
     check_required_text_markers(checks)
     check_game_map(checks)
     check_reference_pngs(checks)
     check_markdown_links(checks)
     check_social_preview(checks)
+
     if args.mode == "student":
         changed = student_changed_paths(checks)
         check_student_change_scope(checks, changed)
         check_student_checkpoint(checks, changed)
+    else:
+        checks.note("Starter mode skips student checkpoint completion checks.")
+
     checks.finish()
 
 

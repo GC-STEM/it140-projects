@@ -82,16 +82,13 @@ working space for this reduced problem.
 
 ## Run the Prototype
 
-From the repository root:
+Run the prototype from the repository root. **Windows users must use Git Bash**
+for this `bash` command block.
 
+<!-- ci:command-test id=run-module-six-prototype fixture=existing-repo expect=repo -->
 ```bash
+cd ~/Repos/it140-projects
 python3 prototype/move_between_rooms.py
-```
-
-On Windows, if `python3` is unavailable in your configured course environment:
-
-```powershell
-python prototype/move_between_rooms.py
 ```
 
 ## Review Against the Milestone Rubric

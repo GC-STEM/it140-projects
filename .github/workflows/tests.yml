@@ -1,4 +1,4 @@
-name: Project Checks
+name: IT 140 Checks
 
 on:
   push:
@@ -13,8 +13,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
-    name: Check projects repository
+  course-repository-check:
+    name: Course repository check
+    if: ${{ github.repository == 'GC-STEM/it140-projects' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -29,26 +30,15 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Determine repository mode
-        id: mode
-        shell: bash
-        run: |
-          if [[ "$GITHUB_REPOSITORY" == "GC-STEM/it140-projects" ]]; then
-            echo "mode=starter" >> "$GITHUB_OUTPUT"
-          else
-            echo "mode=student" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Install Ruff
         run: |
           python -m pip install --disable-pip-version-check "ruff==0.16.3"
 
-      - name: Check repository structure and project artifacts
+      - name: Check repository structure and starter artifacts
         run: |
-          python .github/ci/check_repository.py \
-            --mode "${{ steps.mode.outputs.mode }}"
+          python .github/ci/check_repository.py --mode starter
 
-      - name: Compile Python files
+      - name: Compile course and starter Python files
         run: |
           python -m py_compile \
             prototype/move_between_rooms.py \
@@ -56,9 +46,10 @@ jobs:
             tests/test_move_between_rooms.py \
             tests/test_text_based_game.py \
             .github/ci/check_repository.py \
+            .github/ci/check_readme_commands.py \
             .github/ci/check_starter.py
 
-      - name: Run Ruff
+      - name: Run Ruff on course and starter Python files
         run: |
           python -m ruff check \
             prototype/move_between_rooms.py \
@@ -66,35 +57,116 @@ jobs:
             tests/test_move_between_rooms.py \
             tests/test_text_based_game.py \
             .github/ci/check_repository.py \
+            .github/ci/check_readme_commands.py \
             .github/ci/check_starter.py \
             --output-format=github
 
       - name: Validate course starter
-        if: ${{ steps.mode.outputs.mode == 'starter' }}
-        run: python .github/ci/check_starter.py
+        run: |
+          python .github/ci/check_starter.py
 
-      - name: Write check summary
+      - name: Write course repository summary
         if: ${{ always() }}
         shell: bash
         run: |
-          echo "## IT 140 Projects repository checks" \
+          echo "## IT 140 Projects course repository check" \
             >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Repository mode: **${{ steps.mode.outputs.mode }}**" \
+          echo "This job protects the public M5–M7 starter package," \
+            "documentation, configuration, and course-provided artifacts." \
             >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          if [[ "${{ steps.mode.outputs.mode }}" == "starter" ]]; then
-            echo "The course repository validates the M5 design," \
-              "M6 prototype, and M7 final-game starter artifacts." \
-              >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "A personal repository validates the progressive" \
-              "M5 → M6 → M7 graded checkpoint reached by the student's" \
-              "changed deliverable files." >> "$GITHUB_STEP_SUMMARY"
+          echo "Student project quality is graded from the current D2L" \
+            "Guidelines and Rubrics, not from this workflow." \
+            >> "$GITHUB_STEP_SUMMARY"
+
+  student-project-check:
+    name: Project checkpoint check
+    if: >-
+      ${{
+        github.repository != 'GC-STEM/it140-projects' &&
+        github.event_name == 'push'
+      }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install Ruff
+        run: |
+          python -m pip install --disable-pip-version-check "ruff==0.16.3"
+
+      - name: Check project checkpoint
+        run: |
+          python .github/ci/check_repository.py --mode student
+
+      - name: Code style feedback
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          root="$(git rev-list --max-parents=0 HEAD | head -n 1)"
+          files=()
+
+          for path in \
+            prototype/move_between_rooms.py \
+            src/text_based_game.py
+          do
+            if ! git diff --quiet "$root" HEAD -- "$path"; then
+              files+=("$path")
+            fi
+          done
+
+          if (( ${#files[@]} == 0 )); then
+            echo "No changed project Python file needs Ruff feedback."
+            exit 0
           fi
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "These checks support development. They do not assign a" \
-            "grade or replace requirement-based manual testing." \
+
+          set +e
+          python -m ruff check "${files[@]}" --output-format=github
+          ruff_status=$?
+          set -e
+
+          if (( ruff_status == 0 )); then
+            echo "Ruff found no suggestions in changed project Python files."
+          else
+            echo "Ruff found advisory style or quality suggestions."
+            echo "These suggestions do not change the workflow result."
+          fi
+
+          exit 0
+
+      - name: Write student summary
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          echo "## IT 140 Projects checkpoint feedback" \
             >> "$GITHUB_STEP_SUMMARY"
-          echo "D2L Brightspace remains the submission and grading system." \
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "This is formative repository feedback for the progressive" \
+            "Module 5 → Module 6 → Module 7 project sequence." \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "A newly created personal repository is not treated as an" \
+            "error merely because graded starter files are untouched." \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "After graded work begins, the checkpoint check can report" \
+            "incomplete starter artifacts, Python syntax/structure problems," \
+            "or unexpected changes to course-managed files." \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Ruff feedback is advisory and does not by itself make this" \
+            "workflow fail." >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "A green result is not a grade or a submission. D2L" \
+            "Brightspace remains the submission and grading system." \
             >> "$GITHUB_STEP_SUMMARY"

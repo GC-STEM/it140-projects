@@ -3,54 +3,80 @@ MAINTAINER NOTE:
 This filename intentionally contains a Cyrillic capital IE: Е (U+0415)
 instead of the ASCII capital E: E (U+0045).
 
-GitHub therefore does not treat it as .github/README.md and it does not
-override the repository-root README.
+It is visually similar to README.md, but GitHub does not treat it as the
+special .github/README.md file that would override the repository-root README.
+
+Do not "correct" the filename unless this behavior is no longer desired.
 -->
 
 # About the `.github` Folder
 
 > [!IMPORTANT]
-> Do **not** modify or delete the `.github/` folder or its files. They support
-> repository administration and are not student deliverables.
+> Do **not** modify or delete the `.github/` folder or any files in it. This
+> folder is for repository administration. It is not part of the student
+> procedures or graded deliverables for the projects.
 
 ## What Is Here?
 
 This repository uses `.github/` for GitHub-specific configuration:
 
-- `ISSUE_TEMPLATE/` — forms for reporting repository problems or requesting
-  improvements
-- `ci/` — validation scripts used by the active Project Checks workflow
-- `workflows/tests.yml` — active repository and checkpoint-aware project checks
-- `workflows/external-links.yml` — manual and scheduled Markdown link checking
-- `workflows/tests.yml.disabled` — intentionally disabled legacy test workflow
-- `social-preview.png` — repository social-preview image
+- `ISSUE_TEMPLATE/` — forms for reporting a repository problem or requesting
+  an improvement
+- `ci/README.md` — CI guidance for students, faculty, and maintainers
+- `ci/check_repository.py` — repository and progressive project-checkpoint
+  validation
+- `ci/check_starter.py` — validates the intentionally incomplete course starter
+- `ci/check_readme_commands.py` — validates cross-platform README command blocks
+- `workflows/tests.yml` — active **IT 140 Checks** workflow
+- `workflows/readme-commands.yml` — Linux, macOS, and Windows/Git Bash README
+  command checks for the public course repository
+- `workflows/external-links.yml` — external-link checks
+- `social-preview.png` — the repository social-preview image
 
-These files support the repository itself. They are not graded project files.
+The former `workflows/tests.yml.disabled` file is no longer part of the CI
+design and should be removed.
 
 ## Automated Repository Checks
 
-The active **Project Checks** workflow runs after pushes and pull requests.
+The active checks have different purposes:
 
-In a personal repository, the checks progress with the project sequence:
+### Personal Student Repositories
 
-1. Project One design files
-2. Module Six prototype
-3. Project Two final source
+The student-facing **Project checkpoint check** provides limited formative
+feedback for the progressive Module Five → Module Six → Module Seven sequence.
 
-The workflow validates repository integrity and basic structural requirements.
-It does not assign a grade or replace rubric-based review and manual testing.
+A newly created personal repository is a neutral state. The workflow does not
+treat untouched graded starter files as a student error. Once graded work
+begins, the active checkpoint can report incomplete required artifacts,
+damaged starter structure, Python syntax/structure problems, or unexpected
+changes to course-managed files.
 
-The **External Links** workflow checks links in Markdown files. Its scheduled
-weekly run is limited to the canonical `GC-STEM` course repository so personal
-repositories created from the template do not each run a weekly link crawl.
+For Module Six and Module Seven Python work, Ruff feedback is advisory and does
+not by itself make student CI fail.
+
+### Public Course Repository
+
+The course repository uses separate checks to protect the full starter package,
+including documentation, starter artifacts, Python files, configuration, README
+command blocks, and external links.
+
+For the detailed CI lifecycle and maintainer guidance, see
+[`ci/README.md`](ci/README.md).
 
 ## Issue or Project Question?
 
 Use a GitHub Issue for a technical problem with the provided repository,
-documentation, starter files, or course tools.
+documentation, starter files, or automated checks.
 
-Do **not** use an Issue to request or post completed graded project solutions.
+Do **not** use an Issue to request or post a completed graded solution.
 
-Questions about requirements, grading, submissions, deadlines,
+Codio Virtual Desktop performance, access, or outage problems belong with the
+IT Service Desk. Course IDE setup and lifecycle-script problems use the Module
+One setup support guidance.
+
+Questions about project requirements, grading, submissions, deadlines,
 accommodations, or instructor feedback belong with your instructor in D2L
 Brightspace.
+
+For additional information about the `.github` folder, see the
+[Module One Setup Tasks `.github` README](https://github.com/GC-STEM/it140-m1-setup-tasks/blob/main/.github/R%D0%95ADME.md).

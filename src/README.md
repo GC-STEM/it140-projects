@@ -143,16 +143,13 @@ rubric-aligned planning and debugging checklist.
 
 ## Run the Final Game
 
-From the repository root:
+Run the game from the repository root. **Windows users must use Git Bash** for
+this `bash` command block.
 
+<!-- ci:command-test id=run-project-two-game fixture=existing-repo expect=repo -->
 ```bash
+cd ~/Repos/it140-projects
 python3 src/text_based_game.py
-```
-
-On Windows, if needed:
-
-```powershell
-python src/text_based_game.py
 ```
 
 ## Construction Checkpoint

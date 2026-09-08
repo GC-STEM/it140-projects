@@ -22,9 +22,12 @@ graded deliverable unless your instructor specifically asks for it.
 
 # Module Six | Test the Movement Prototype
 
-Run:
+Run the milestone from the repository root. **Windows users must use Git Bash**
+for this `bash` command block.
 
+<!-- ci:command-test id=test-run-module-six fixture=existing-repo expect=repo -->
 ```bash
+cd ~/Repos/it140-projects
 python3 prototype/move_between_rooms.py
 ```
 
