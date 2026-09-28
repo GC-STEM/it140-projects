@@ -18,14 +18,14 @@ the player must gather, and the threat created by the villain.
 
 Project One requires a minimum of eight rooms.
 
-1. TODO: Start room
-2. TODO: Room
-3. TODO: Room
-4. TODO: Room
-5. TODO: Room
-6. TODO: Room
-7. TODO: Room
-8. TODO: Villain room
+1. TODO: Submarine Dock — Start Room
+2. TODO: Control Room
+3. TODO: Science Lab
+4. TODO: Storage Room
+5. TODO: Medical Bay
+6. TODO: Engine Room
+7. TODO: Observation Deck
+8. TODO: Deep Sea Trench — Villain Room
 
 Add more rooms if your design needs them.
 
@@ -34,21 +34,60 @@ Add more rooms if your design needs them.
 With the minimum eight-room design, Project One requires at least six items.
 Every room except the start room and villain room must contain one item.
 
-1. TODO: Item
-2. TODO: Item
-3. TODO: Item
-4. TODO: Item
-5. TODO: Item
-6. TODO: Item
+1. TODO: Navigation Chip — Control Room
+2. TODO: Research Sample — Science Lab
+3. TODO: Repair Tools — Storage Room
+4. TODO: First Aid Kit — Medical Bay
+5. TODO: Power Cell — Engine Room
+6. TODO: Diving Mask — Observation Deck
 
 If you add rooms beyond the minimum, add an item for every additional room
 except the start room and villain room.
 
 ## Villain
 
-TODO: Identify and briefly describe the villain.
+TODO: The villain is the Kraken, a giant sea creature that lives in the Deep Sea Trench. The player must collect all six items before entering the trench. If the player enters the trench before collecting everything, the Kraken attacks and the game ends.
 
 ## Storyboard and Map Check
++-------------------+     +-------------------+
+|   CONTROL ROOM    |     |    SCIENCE LAB    |
+|  Navigation Chip  |     |  Research Sample  |
++---------+---------+     +---------+---------+
+          |                         |
+          |                         |
+          v                         v
++---------+-------------------------+---------+
+|              SUBMARINE DOCK                 |
+|                   START                      |
+|                 NO ITEM                     |
++---------+-------------------+---------------+
+          |                   |
+          |                   |
+          v                   v
++---------+---------+   +-----+-------------+
+|   STORAGE ROOM    |   |    MEDICAL BAY    |
+|   Repair Tools    |   |    First Aid Kit  |
++---------+---------+   +-------------------+
+          |
+          v
++---------+---------+
+|    ENGINE ROOM    |
+|     Power Cell    |
++---------+---------+
+          |
+          v
++---------+---------+
+| OBSERVATION DECK  |
+|    Diving Mask    |
++---------+---------+
+          |
+          v
++---------+---------+
+|  DEEP SEA TRENCH  |
+|      KRAKEN       |
+|      NO ITEM      |
++-------------------+
+
 
 Before submitting, compare this storyboard with `game_map.drawio`.
 
